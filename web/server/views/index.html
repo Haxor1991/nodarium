@@ -1,8 +1,28 @@
 {% extends 'layouts/default.html' %}
 {% block content %}
-    <section data-ui-view />
+
+<h1>Hello</h1>
+
+<div contenteditable="true" id="arduino_messages" ng-model="eventList">
+    <span class="sent">1/23/2004 1:13:23.412 - Send:  Turn on channel 1 full</span>
+    <span class="received">1/23/2004 1:13:23.412 - Received: Channel 1 turned on</span>
+    <span class="sent">1/23/2004 1:13:23.412 - Send: Turn on channel 2 full</span>
+    <span class="received">1/23/2004 1:13:23.412 - Received: Channel 2 turned on</span>
+    <span class="sent">1/23/2004 1:13:23.412 - Send: Turn on channel 3 full</span>
+    <span class="received">1/23/2004 1:13:23.412 - Received: Channel 3 turned on</span>
+</div>
+
+
+<section data-ui-view />
+
     <script type="text/javascript">
-        window.user = {{user|safe}};        
-        window.modules = {{modules|safe}};      
+
+        window.user = {{user|safe}};
+        window.modules = {{modules|safe}};
+
     </script>
+
+
+
+
 {% endblock %}
