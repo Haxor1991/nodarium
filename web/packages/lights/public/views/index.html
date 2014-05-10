@@ -2,16 +2,13 @@
     <div class="row">
         <div class="col-sm-4  ">
             <div class="lightList panel panel-info" data-ng-controller="LightListController">
-                <div class="panel-heading">
+                <div class="panel-heading clearfix">
+                    <div class="btn-group btn-group-sm pull-right">
+                        <button type="button" class="btn btn-default btn-success" ng-click="addLightFixture()">Add a Light Fixture</button>
+                    </div>
                     <h3 class="panel-title">{{ title }}</h3>
                 </div>
 
-                <div class="btn-group btn-group-justified">
-                    <div class="btn-group">
-                        <button type="button" class="btn btn-default btn-success">Add a Light Fixture</button>
-                    </div>
-
-                </div>
 
                 <div class="list-group">
                     <div class="list-group-item" ng-show="!lights.length">
@@ -32,194 +29,41 @@
 
         <div class="lights col-sm-8">
             <div class="panel panel-info">
-                <div class="panel-heading">
+                <div class="panel-heading clearfix">
+                    <div class="btn-group btn-group-sm pull-right" ng-show="selectedLight">
+                        <button class="btn btn-default btn-success" ng-click="saveModifiedLight()"
+                                ng-disabled="form.lightFixtureSettings.$dirty">
+                            Save Changes
+                        </button>
+                        <button class="btn btn-default btn-info" ng-click="cancelSelection()">Cancel</button>
+                        <button class="btn btn-default btn-danger" ng-click="deleteLightFixture(selectedLight)">Delete Light Fixture</button>
+
+                    </div>
+
                     <h2 class="panel-title">Light Fixture Settings</h2>
+
                 </div>
                 <div class="panel-body">
                     <div ng-show="!selectedLight">
                         <p>Select a light fixture from the left</p>
                     </div>
-                    <form action="" ng-show="selectedLight" class="form-horizontal clearfix"
-                          name="lightFixtureSettings">
-                        <div class="form-group">
-                            <label for="fixtureTitle" class="col-sm-3 control-label">Fixture Name</label>
+                    <tabset ng-show="selectedLight">
 
-                            <div class="col-sm-9">
-                                <input class="form-control" id="fixtureTitle" type="text" name="fixtureTitle"
-                                       ng-model="selectedLight.title"/>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="fixtureType" class="control-label col-sm-3">Fixture Type</label>
-
-                            <div class="col-sm-9">
-                                <input class="form-control" type="text" id="fixtureType" name="fixtureType"
-                                       ng-model="selectedLight.type"/>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="fixtureDescription" class="control-label col-sm-3">Fixture Description</label>
-
-                            <div class="col-sm-9">
-                                <textarea class="form-control" name="fixtureDescription" id="fixtureDescription"
-                                          ng-model="selectedLight.description"
-                                          cols="30" rows="10"> </textarea>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <div class="channels">
-                                <div ng-repeat="channel in channels">
-                                    <div class="form-group">
-                                        <input type="text"/>
-                                    </div>
-
-                                </div>
-
-                                <div>
-
-                                    <div class="col-sm-12">
-                                        <div class="col-sm-8 pull-right">
-                                            <p class="text-right">There are {{ selectedLight.channels.length }}
-                                                configured channels on this
-                                                fixture</p>
-                                        </div>
-
-                                    </div>
-
-                                    <div class="channel" ng-repeat="(channelKey, channel) in selectedLight.channels">
-                                        <div class="form-group">
-                                            <label for="ChannelColor-{{ channelKey }}]" class="control-label col-sm-3">Channel
-                                                {{ channelKey }}</label>
-
-                                            <div class=" col-sm-9 ">
-                                                <div class="">
-                                                    <div class="col-xs-6">
-                                                        <input class="form-control" type="text"
-                                                               id="ChannelColor-{{ channelKey }}]"
-                                                               placeHolder="Channel Name"
-                                                               name="fixtureType"
-                                                               ng-model="selectedLight.channels[channelKey].channelName"/>
-                                                    </div>
-                                                    <div class="col-xs-1">
-                                                        <input class="form-control" colorpicker="hex"
-                                                               ng-model="selectedLight.channels[channelKey].color"
-                                                               type="text"
-                                                               style="background: {{ selectedLight.channels[channelKey].color }}; color: {{ selectedLight.channels[channelKey].color }};">
-                                                    </div>
-                                                    <div class="col-xs-2">
-                                                        <input class="form-control" type="number"
-                                                               id="ChannelPin-{{ channelKey }}]"
-                                                               placeHolder="Pin Number"
-                                                               name="fixtureType"
-                                                               ng-model="selectedLight.channels[channelKey].pin"/>
-                                                    </div>
-                                                    <div class="col-xs-3"><input class="form-control" type="text"
-                                                                                 id="ChannelPinGroup-{{ channelKey }}]"
-                                                                                 placeHolder="Pin Group"
-                                                                                 name="fixtureType"
-                                                                                 ng-model="selectedLight.channels[channelKey].pinsGroup"/>
-                                                    </div>
-                                                </div>
-
-                                            </div>
-                                        </div>
+                        <tab heading="Fixture Settings">
+                            <ng-include src="'/lights/views/edit.html'"></ng-include>
+                        </tab>
+                        <tab heading="Color Channels">
+                            <ng-include src="'/lights/views/lightChannels.html'"></ng-include>
+                        </tab>
+                        <tab heading="Day Settings"  select="enterSettingsMode()" deselect="cancelSettingsMode()">
+                            <ng-include src="'/lights/views/dayLightSettings.html'"></ng-include>
+                        </tab>
+                        <tab heading="Night Settings"  select="enterSettingsMode()" deselect="cancelSettingsMode()">
+                            <ng-include src="'/lights/views/nightLightSettings.html'"></ng-include>
+                        </tab>
+                    </tabset>
 
 
-                                    </div>
-                                    <div class="col-sm-offset-9 col-sm-3 ">
-                                        <button class="btn btn-default btn-success btn-sm" ng-click="addChannel()">Add a
-                                            Channel
-                                        </button>
-                                    </div>
-                                    <div>
-                                        {{ rgbPicker.color }}
-                                        <div class="sliderExample">
-                                            <div>
-                                                <strong>Slider - vertical, step value 5</strong>
-                                            </div>
-
-
-                                            <div class="vertical-container" ng-repeat="(channelKey, channel) in selectedLight.channels">
-                                                <div ui-slider="{orientation: 'vertical', range: 'min'}" min="0"
-                                                     max="25" step="5" ng-model="demoVals.sliderExample2" style="background: {{ channel.color }}"></div>
-                                            </div>
-                                            <div class="vertical-container">
-                                                <div ui-slider="{orientation: 'vertical', range: 'max'}" min="0"
-                                                     max="25" step="5" ng-model="demoVals.sliderExample2"></div>
-                                            </div>
-                                            <div class="vertical-container">
-                                                <div ui-slider="{orientation: 'vertical', range: 'min'}" min="0"
-                                                     max="25" step="5" ng-model="demoVals.sliderExample2"></div>
-                                            </div>
-                                            <div class="vertical-container">
-                                                <div ui-slider="{orientation: 'vertical', range: 'max'}" min="0"
-                                                     max="25" step="5" ng-model="demoVals.sliderExample2"></div>
-                                            </div>
-                                            <div class="vertical-container">
-                                                <div ui-slider="{orientation: 'vertical', range: 'min'}" min="0"
-                                                     max="25" step="5" ng-model="demoVals.sliderExample2"></div>
-                                            </div>
-                                            <div>
-                                                <input type="text" ng-model="demoVals.sliderExample2"/>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-
-                        <div class="form-group">
-                            <div class="col-sm-offset-3 col-sm-9">
-                                <div class="btn-group">
-                                    <button class="btn btn-default btn-info" ng-click="saveModifiedLight()"
-                                            ng-disabled="form.lightFixtureSettings.$dirty">Save Changes
-                                    </button>
-                                    <button class="btn btn-default btn-danger">Delete Light Fixtures</button>
-                                </div>
-
-                            </div>
-                        </div>
-
-                    </form>
-
-
-                    <div>
-<h2>tabs</h2>
-
-                        <tabset>
-                            <tab heading="Static title">Settings</tab>
-                            <tab heading="Static titlef">SBla bla bla</tab>
-                            <tab heading="Staticafs title">Static content</tab>
-                        </tabset>
-
-                    </div>
-
-
-
-                    <div ng-style="test">
-                        input.slider123456::-webkit-slider-thumb:before {
-                        background: {{ selectedLight.channels[0].color }} ;
-                        }
-                    </div>
-
-                    {{ selectedLight }}
-                    <div class="range">
-                        <i class="icon ion-volume-low"></i>
-                        <input type="range" name="volume" ng-model="myVolumeSlider" min="0" max="4095" class="slider123456">
-                        <i class="icon ion-volume-high"></i>
-                    </div>
-                    {{ myVolumeSlider }}
-
-                    <div class="list">
-                        <div class="item range range-positive">
-                            <i class="icon ion-ios7-sunny-outline"></i>
-                            <input type="range" name="volume" min="0" max="100" value="33">
-                            <i class="icon ion-ios7-sunny"></i>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>

@@ -17,7 +17,7 @@ var LightSchema = new Schema({
     },
     title: {
         type: String,
-        default: '',
+        default: 'New Light Fixture',
         trim: true
     },
     type: {
@@ -47,9 +47,15 @@ var LightSchema = new Schema({
             pinsGroup : {
                 type: String,
                 trim: true
-            }
+            },
+            day: Number,
+            night: Number
         }
-    ]
+    ],
+    lightIntensity: {
+        day: Number,
+        night:Number
+    }
 
 
 });

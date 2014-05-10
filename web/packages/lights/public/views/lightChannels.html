@@ -1,0 +1,61 @@
+<div class="panel-body">
+
+        <div class="form-horizontal" >
+
+            <div class="">
+                <div class="form-group">
+                    <p class="col-sm-9 form-control-static">There are {{ selectedLight.channels.length }}
+                        configured channels on this
+                        fixture</p>
+
+                    <button class="btn btn-default btn-success col-sm-3" ng-click="addChannel()">Add a new Channel</button>
+                </div>
+            </div>
+
+
+
+            <div class="channel" ng-repeat="(channelKey, channel) in selectedLight.channels">
+
+            <div class="form-group col-sm-5">
+                <input class="form-control" type="text"
+                       id="ChannelColor-{{ channelKey }}]"
+                       placeHolder="Channel Name"
+                       name="fixtureType"
+                       ng-model="selectedLight.channels[channelKey].channelName"/>
+            </div>
+            <div class="form-group col-sm-2">
+
+                <input class="form-control" colorpicker="hex"
+                       ng-model="selectedLight.channels[channelKey].color"
+                       type="text"
+                       style="background: {{ selectedLight.channels[channelKey].color }}; color: {{ selectedLight.channels[channelKey].color }};">
+            </div>
+            <div class="form-group col-sm-3">
+
+            <input class="form-control" type="number"
+                       id="ChannelPin-{{ channelKey }}]"
+                       placeHolder="Pin Number"
+                       name="fixtureType"
+                       ng-model="selectedLight.channels[channelKey].pin"/>
+            </div>
+            <div class="form-group col-sm-3">
+
+            <input class="form-control" type="text"
+                                           id="ChannelPinGroup-{{ channelKey }}]"
+                                           placeHolder="Pin Group"
+                                           name="fixtureType"
+                                           ng-model="selectedLight.channels[channelKey].pinsGroup"/>
+            </div>
+
+            <div class="form-group col-sm-1">
+                <button class="btn btn-default btn-danger" ng-click="deleteChannel(channelKey)"><span
+                        class="glyphicon glyphicon-remove-circle"></span></button>
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+</div>

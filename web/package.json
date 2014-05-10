@@ -70,7 +70,8 @@
     "view-helpers": "^0.1.4",
     "socket.io": "latest",
     "passport.socketio": "latest",
-    "connect-mongo-store": "latest"
+    "connect-mongo-store": "latest",
+      "serialport": "latest"
   },
   "devDependencies": {
     "assetmanager": "^0.1.2",

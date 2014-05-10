@@ -1,0 +1,27 @@
+<div class="panel-body form-horizontal">
+
+    <fieldset>
+        <legend>Brightness</legend>
+        <div class="form-group clearfix">
+            <label for="nightIntensity" class="col-sm-3 control-label">Maximum Brightness</label>
+
+            <div class="col-sm-9">
+                <input id="nightIntensity" type="range" name="volume" ng-model="selectedLight.lightIntensity.night" min="0" max="100"
+                       >
+            </div>
+        </div>
+
+    </fieldset>
+    <fieldset>
+        <legend>Color Spectrum</legend>
+
+        <div class="form-group clearfix" ng-repeat="(channelKey, channel) in selectedLight.channels">
+            <label for="channel{{ channelKey }}-night-spec" class="col-sm-3 control-label">{{ channel.channelName }}</label>
+
+            <div class="col-sm-9">
+                <input id="channel{{ channelKey }}-night-spec" type="range" name="volume" ng-model="channel.night" min="0" max="4095">
+            </div>
+        </div>
+
+    </fieldset>
+</div>

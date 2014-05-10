@@ -43,52 +43,30 @@ exports.update = function(req, res) {
     lightfixture.save(function(err) {
         if (err) {
             return res.send('users/signup', {
-                errors: err.errors,
-                article: lightfixture
+                errors: err.errors
             });
         } else {
             res.jsonp(lightfixture);
         }
     });
 };
-//
-///**
-// * Update an article
-// */
-//exports.update = function(req, res) {
-//    var article = req.article;
-//
-//    article = _.extend(article, req.body);
-//
-//    article.save(function(err) {
-//        if (err) {
-//            return res.send('users/signup', {
-//                errors: err.errors,
-//                article: article
-//            });
-//        } else {
-//            res.jsonp(article);
-//        }
-//    });
-//};
-//
-///**
-// * Delete an article
-// */
-//exports.destroy = function(req, res) {
-//    var article = req.article;
-//
-//    article.remove(function(err) {
-//        if (err) {
-//            return res.send('users/signup', {
-//                errors: err.errors,
-//                article: article
-//            });
-//        } else {
-//            res.jsonp(article);
-//        }
-//    });
-//};
+
+/**
+* Delete an article
+*/
+exports.destroy = function(req, res) {
+    var light = req.light;
+
+    light.remove(function(err) {
+        if (err) {
+            return res.send('users/signup', {
+                errors: err.errors
+            });
+        } else {
+            res.jsonp(light);
+        }
+    });
+};
 //
 ///**
 // * Show an article

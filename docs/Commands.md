@@ -59,3 +59,22 @@ Command Number, probe number, relative humidity.
 ```
 R03|00|t|57.43
 ```
+
+
+###04 - Turn on light (singular)
+*Perameters:*
+PWM Switch number as defined in PWM chip array
+PWM PIN (00-16)
+Value (0000-4095)
+
+
+Sample Command:
+```
+C04|00|00|0000
+```
+
+*Returns:*
+Command Number, probe number, relative humidity.
+```
+R04|00|00|0000
+```
