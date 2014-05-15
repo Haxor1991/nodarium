@@ -31,7 +31,7 @@ module.exports = function(app) {
         .get(function(req, res){
             console.log('GET', req.body);
 //            app.writeAndDrain('tty.linvor-DevB');
-            app.writeAndDrain('C01|01\n');
+            app.writeAndDrain('C00\n');
             res.jsonp({'done': 'ok'});
 
         })
