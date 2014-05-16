@@ -74,7 +74,7 @@ C04|00|00|0000
 ```
 
 *Returns:*
-Command Number, probe number, relative humidity.
+kjkkjk
 ```
 R04|00|00|0000
 ```

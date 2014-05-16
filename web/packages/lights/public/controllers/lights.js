@@ -1,12 +1,12 @@
 'use strict';
 
-angular.module('mean').controller('LightsController', ['$scope', 'Global', 'Lights', '$location',
-    function ($scope, Global, Lights, $location) {
+angular.module('mean').controller('LightsController', ['$scope', 'Global', 'Lights', '$location', 'sockets',
+    function ($scope, Global, Lights, $location, sockets) {
         $scope.lights = Lights.query();
         $scope.selectedLight = null;
 
-        $scope.setSelectedLight = function (light){
-        console.log(light);
+        $scope.setSelectedLight = function (light) {
+            console.log(light);
             $scope.selectedLight = light;
         };
         $scope.cancelSelection = function () {
@@ -33,19 +33,19 @@ angular.module('mean').controller('LightsController', ['$scope', 'Global', 'Ligh
             $scope.selectedLight.channels.splice(index, 1);
         };
 
-        $scope.addLightFixture = function(){
+        $scope.addLightFixture = function () {
             var newLightFixture = new Lights();
-            newLightFixture.$save(function(response) {
+            newLightFixture.$save(function (response) {
                 $scope.lights = Lights.query();
             });
         };
 
-        $scope.enterSettingsMode = function() {
-           console.log('entering settings mode');
+        $scope.enterSettingsMode = function () {
+            console.log('entering settings mode');
         };
 
 
-        $scope.cancelSettingsMode = function() {
+        $scope.cancelSettingsMode = function () {
             console.log('cancelling settings mode');
         };
 
@@ -70,5 +70,55 @@ angular.module('mean').controller('LightsController', ['$scope', 'Global', 'Ligh
             $scope.selectedLight = null;
 
         };
-    }
-]);
+
+
+        // Sockets Communcations
+        $scope.updateLight = function (channel, day) {
+            day = day || 'day';
+            var data = {
+                pwmChip: $scope.selectedLight.channels[channel].pinsGroup,
+                channel: $scope.selectedLight.channels[channel].pin,
+                value: parseInt($scope.selectedLight.channels[channel][day] * $scope.selectedLight.lightIntensity[day] / 100)
+
+            };
+
+            sockets.emit('Update Light Channel', data);
+        };
+
+
+        $scope.updateAllLights = function (day) {
+            day = day || 'day';
+
+            var data = {
+                channels: []
+            };
+
+            angular.forEach($scope.selectedLight.channels, function (channel) {
+                data.channels.push({
+                    pwmChip: channel.pinsGroup,
+                    channel: channel.pin,
+                    value: parseInt(channel[day] * $scope.selectedLight.lightIntensity[day] / 100)
+                });
+
+
+            });
+
+
+//            var data = {
+//
+//                channels: [
+////                {
+//                    pwmChip: $scope.selectedLight.channels[channel].pinGroup,
+//                    channel: $scope.selectedLight.channels[channel].pin,
+//                    value: parseInt($scope.selectedLight.channels[channel][day] * $scope.selectedLight.lightIntensity[day] / 100)
+//                }
+//
+//            ]
+
+
+//        };
+        sockets.emit('Update All Channels', data);
+    };
+}
+])
+;

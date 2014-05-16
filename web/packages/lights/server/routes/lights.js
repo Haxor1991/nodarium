@@ -41,4 +41,37 @@ module.exports = function (Lights, app, auth, database) {
 
 
 
+
+    // handling light functions to the arduino
+    var io = app.io;
+//    var serialPort = app.serialPort;
+    var writeAndDrain = app.writeAndDrain; // used to send commands to arduino....
+
+    // SOCKET IO ROUTES / Events
+    io.sockets.on('connection', function(socket){
+
+        socket.on('Update Light Channel', function(data){
+
+            console.log('updating light channel', data);
+            // get channel info / validate
+
+            // talk to arduino
+            writeAndDrain('C04|00|00|0000');
+        });
+
+        socket.on('Update All Channels', function(data){
+
+            console.log('pdate All Channels', data);
+            // get channel info / validate
+
+            // talk to arduino
+        });
+
+    });
+
+
+
+
+
+
 };

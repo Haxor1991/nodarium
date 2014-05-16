@@ -6,7 +6,7 @@
             <label for="nightIntensity" class="col-sm-3 control-label">Maximum Brightness</label>
 
             <div class="col-sm-9">
-                <input id="dayIntensity" type="range" name="volume" ng-model="selectedLight.lightIntensity.day" min="0" max="100"
+                <input ng-change="updateAllLights()" id="dayIntensity" type="range" name="volume" ng-model="selectedLight.lightIntensity.day" min="0" max="100"
                         >
             </div>
         </div>
@@ -19,7 +19,7 @@
             <label for="channel{{ channelKey }}-day-spec" class="col-sm-3 control-label">{{ channel.channelName }}</label>
 
             <div class="col-sm-9">
-                <input id="channel{{ channelKey }}-day-spec" type="range" name="volume" ng-model="channel.day" min="0" max="4095">
+                <input id="channel{{ channelKey }}-day-spec" type="range" name="volume" ng-model="channel.day" min="0" max="4095" ng-change="updateLight(channelKey)">
             </div>
         </div>
 

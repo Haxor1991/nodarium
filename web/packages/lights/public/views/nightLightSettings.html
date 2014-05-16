@@ -6,7 +6,7 @@
             <label for="nightIntensity" class="col-sm-3 control-label">Maximum Brightness</label>
 
             <div class="col-sm-9">
-                <input id="nightIntensity" type="range" name="volume" ng-model="selectedLight.lightIntensity.night" min="0" max="100"
+                <input ng-change="updateAllLights('night')" id="nightIntensity" type="range" name="volume" ng-model="selectedLight.lightIntensity.night" min="0" max="100"
                        >
             </div>
         </div>
@@ -19,7 +19,7 @@
             <label for="channel{{ channelKey }}-night-spec" class="col-sm-3 control-label">{{ channel.channelName }}</label>
 
             <div class="col-sm-9">
-                <input id="channel{{ channelKey }}-night-spec" type="range" name="volume" ng-model="channel.night" min="0" max="4095">
+                <input id="channel{{ channelKey }}-night-spec" type="range" name="volume" ng-model="channel.night" min="0" max="4095"  ng-change="updateLight(channelKey, 'night')">
             </div>
         </div>
 
