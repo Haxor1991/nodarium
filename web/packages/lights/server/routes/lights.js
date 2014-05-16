@@ -72,7 +72,7 @@ module.exports = function (Lights, app, auth, database) {
 
             // talk to arduino
 
-            for(var i == 0; i < data.channels.length; i++){
+            for(var i = 0; i < data.channels.length; i++){
                 var pwmChannel = (data.channels[i].pwmChip === 'pwm1') ? '00' : '01';
                 writeAndDrain('C04|'+pwmChannel+'|'+pad(data.channels[i].channel,2)+'|'+pad(data.channels[i].value,4)+'\n');
             }
