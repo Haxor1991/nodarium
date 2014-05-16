@@ -56,7 +56,7 @@ module.exports = function (Lights, app, auth, database) {
             // get channel info / validate
 
             // talk to arduino
-            writeAndDrain('C04|00|00|0000');
+            writeAndDrain('C04|00|00|0000\n');
         });
 
         socket.on('Update All Channels', function(data){
