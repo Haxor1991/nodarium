@@ -10,7 +10,7 @@ var mongoose = require('mongoose'),
     serialport = require('serialport'),
     SerialPort = serialport.SerialPort,
     serialPort = new SerialPort('/dev/rfcomm0', {
-        baudrate: 1382400,
+        baudrate: 921600,
         parser: serialport.parsers.readline('\n')
     }, false); // this is the openImmediately flag [default is true]
 
