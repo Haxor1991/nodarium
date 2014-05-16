@@ -41,6 +41,11 @@ module.exports = function (Lights, app, auth, database) {
 
 
 
+    function pad(num, size) {
+        var s = '000000000' + num;
+        return s.substr(s.length-size);
+    }
+
 
     // handling light functions to the arduino
     var io = app.io;
@@ -56,7 +61,8 @@ module.exports = function (Lights, app, auth, database) {
             // get channel info / validate
 
             // talk to arduino
-            writeAndDrain('C04|00|00|0000\n');
+            var pwmChannel = (data.pwmChip === 'pwm1') ? '00' : '01';
+            writeAndDrain('C04|'+pwmChannel+'|'+pad(data.channel,2)+'|'+pad(data.value,4)+'\n');
         });
 
         socket.on('Update All Channels', function(data){
@@ -68,6 +74,7 @@ module.exports = function (Lights, app, auth, database) {
         });
 
     });
+
 
 
 
