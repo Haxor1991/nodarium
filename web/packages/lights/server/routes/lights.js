@@ -67,7 +67,7 @@ module.exports = function (Lights, app, auth, database) {
 
         socket.on('Update All Channels', function(data){
 
-            console.log('pdate All Channels', data);
+            console.log('Update All Channels', data);
             // get channel info / validate
 
             // talk to arduino

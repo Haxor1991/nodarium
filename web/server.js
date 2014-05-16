@@ -15,12 +15,16 @@ var mongoose = require('mongoose'),
     }, false); // this is the openImmediately flag [default is true]
 
 function writeAndDrain(data, callback) {
-    console.log('sending data to arduino: ', data);
-    callback = callback || function () {
-    };
-    serialPort.write(data, function (error, results) {
-        serialPort.drain(callback);
-    });
+
+    setTimeout(function(){
+        console.log('sending data to arduino: ', data);
+        callback = callback || function () {
+        };
+        serialPort.write(data, function (error, results) {
+            serialPort.drain(callback);
+        });
+    },25);
+
 }
 
 /**
