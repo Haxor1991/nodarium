@@ -6,15 +6,15 @@ angular.module('mean').controller('LightsController', ['$scope', 'Global', 'Ligh
         $scope.selectedLight = null;
 
         $scope.setSelectedLight = function (light) {
-            console.log(light);
             $scope.selectedLight = light;
         };
         $scope.cancelSelection = function () {
             $scope.selectedLight = null;
         };
 
-        $scope.saveModifiedLight = function () {
-            var lightFixture = $scope.selectedLight;
+        $scope.saveModifiedLight = function (light) {
+
+            var lightFixture = light || $scope.selectedLight;
 
             lightFixture.$update(function () {
                 $scope.lights = Lights.query();
@@ -28,8 +28,6 @@ angular.module('mean').controller('LightsController', ['$scope', 'Global', 'Ligh
         };
 
         $scope.deleteChannel = function (index) {
-            console.log($scope.selectedLight.channels);
-            console.log('removing ' + index);
             $scope.selectedLight.channels.splice(index, 1);
         };
 
@@ -41,12 +39,12 @@ angular.module('mean').controller('LightsController', ['$scope', 'Global', 'Ligh
         };
 
         $scope.enterSettingsMode = function () {
-            console.log('entering settings mode');
+            // Enter Settings mode
         };
 
 
         $scope.cancelSettingsMode = function () {
-            console.log('cancelling settings mode');
+            // cancel settings mode
         };
 
         $scope.deleteLightFixture = function (lightFixture) {

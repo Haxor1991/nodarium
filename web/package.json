@@ -71,7 +71,9 @@
     "socket.io": "latest",
     "passport.socketio": "latest",
     "connect-mongo-store": "latest",
-      "serialport": "latest"
+      "serialport": "latest",
+      "node-schedule": "latest"
+
   },
   "devDependencies": {
     "assetmanager": "^0.1.2",

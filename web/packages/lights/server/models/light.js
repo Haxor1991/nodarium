@@ -55,7 +55,14 @@ var LightSchema = new Schema({
     lightIntensity: {
         day: Number,
         night:Number
-    }
+    },
+    schedule: {
+        day: Date,
+        night: Date,
+        ramping: Date
+    },
+    mode: String // or manual/auto
+
 
 
 });

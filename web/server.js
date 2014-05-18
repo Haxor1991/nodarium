@@ -14,6 +14,7 @@ var mongoose = require('mongoose'),
         parser: serialport.parsers.readline('\n')
     }, false); // this is the openImmediately flag [default is true]
 
+
 function writeAndDrain(data, callback) {
 
     setTimeout(function(){
@@ -79,40 +80,13 @@ app.isArduinoConnected = false;
 var arduinoConnection = setInterval(
     function () {
         app.serialPort.open(function (err) {
-            if (err) {
-                console.log('unable to connect');
-            } else {
+            if (!err) {
+
                 app.isArduinoConnected = true;
                 clearInterval(arduinoConnection);
             }
         });
     }, 1000);
 
-serialPort.on('error', function () {
-    var arduinoConnection = setInterval(
-        function () {
-            app.serialPort.open(function (err) {
-                if (err) {
-                    console.log('unable to connect');
-                } else {
-                    clearInterval(arduinoConnection);
-                }
-            });
-        }, 1000);
-});
-
-serialPort.on('data', function(data){
-    console.log(data);
-//    data = JSON.parse(data);
-//    console.log(data);
-//    if(data.status && data.status === 'alive') {
-//        console.log('live connection....');
-//    } else {
-//        console.log('no connection');
-//    }
-});
-
 // Expose app
-exports = module.exports = app;
-
-/// test
+//exports = module.exports = app;

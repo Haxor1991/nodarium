@@ -49,7 +49,7 @@ module.exports = function (Lights, app, auth, database) {
 
     // handling light functions to the arduino
     var io = app.io;
-//    var serialPort = app.serialPort;
+    // var serialPort = app.serialPort;
     var writeAndDrain = app.writeAndDrain; // used to send commands to arduino....
 
     // SOCKET IO ROUTES / Events

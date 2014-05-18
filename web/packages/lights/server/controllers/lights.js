@@ -7,7 +7,6 @@ var mongoose = require('mongoose'),
     Light = mongoose.model('Light'),
     _ = require('lodash');
 
-
 /**
 * Find article by id
 */
@@ -79,13 +78,13 @@ exports.destroy = function(req, res) {
  * List of Light Fixtures
  */
 exports.all = function(req, res) {
-    Light.find().sort('-title').exec(function(err, articles) {
+    Light.find().exec(function(err, lights) {
         if (err) {
             res.render('error', {
                 status: 500
             });
         } else {
-            res.jsonp(articles);
+            res.jsonp(lights);
         }
     });
 };

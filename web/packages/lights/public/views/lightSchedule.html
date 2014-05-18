@@ -1,0 +1,54 @@
+<div class="" data-ng-controller="LightsController">
+
+    <accordion close-others="oneAtATime">
+        <accordion-group is-open="status.open" ng-repeat="light in lights">
+            <accordion-heading>
+                {{ light.title }} <i class="pull-right glyphicon"
+                                     ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i>
+            </accordion-heading>
+            <form action="" class="form-horizontal clearfix"
+                  name="lightScheduleSettings">
+                <div class="form-group">
+                    <label for="fixtureTitle" class="col-sm-3 control-label">Sun Rise</label>
+
+                    <div class="col-sm-9">
+                        <timepicker ng-model="light.schedule.day" ng-change="changed()" hour-step="1" minute-step="1"
+                                    show-meridian="true"></timepicker>
+                        <span class="help-block">Defines the time where the night cycle ends, and the day cycle begin.</span>
+                    </div>
+                    {{ light.schedule.day }}
+                </div>
+                <div class="form-group">
+                    <label for="fixtureTitle" class="col-sm-3 control-label">Sun Set</label>
+
+                    <div class="col-sm-9">
+                        <timepicker ng-model="light.schedule.night" ng-change="changed()" hour-step="1" minute-step="1"
+                                    show-meridian="true"></timepicker>
+                        <span class="help-block">Defines the time where the day cycle ends, and the night cycle begin.</span>
+
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="fixtureTitle" class="col-sm-3 control-label">Ramp Up/Ramp Down</label>
+
+                    <div class="col-sm-9">
+                        <timepicker ng-model="light.schedule.ramping" ng-change="changed()" hour-step="1"
+                                    minute-step="1" show-meridian="false"></timepicker>
+                        <span class="help-block">How long does it takes to ramp up to the day's brightest settings, and how long it takes to ramp down.</span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+
+                    <div class="col-sm-9 col-sm-offset-3">
+                        <button ng-click="saveModifiedLight(light)">Save Changes</button>
+                    </div>
+                </div>
+
+            </form>
+        </accordion-group>
+    </accordion>
+
+
+</div>
+
