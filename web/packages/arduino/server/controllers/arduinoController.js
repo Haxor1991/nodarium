@@ -98,7 +98,7 @@ var light = module.exports = {
                     _(lightFixture.channels).forEach(function (channel) {
                         var value = light.calculateBrightness(channel, lightFixture.lightIntensity, currentTime, onTime, offTime, rampTime);
 
-                        light.sendLightConfigToArduino(app, {'pwmChip': lightFixture.pwmChip, 'channel': channel.pin, 'value':value});
+                        light.sendLightConfigToArduino(app, {'pwmChip': lightFixture.pinsGroup, 'channel': channel.pin, 'value':value});
                     });
 
                 });
@@ -110,6 +110,7 @@ var light = module.exports = {
     sendLightConfigToArduino: function (app, data) {
 
         // talk to arduino
+        console.log(data);
         var pwmChannel = (data.pwmChip === 'pwm1') ? '00' : '01';
         app.writeAndDrain('C04|'+pwmChannel+'|'+light.pad(data.channel,2)+'|'+light.pad(data.value,4)+'\n');
 
