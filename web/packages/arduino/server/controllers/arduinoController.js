@@ -9,10 +9,14 @@ var light = module.exports = {
     lights: {},
 
     timeToMinutes: function (time) {
+        if(typeof(time.getHours) === 'undefined' )
+            return 0;
         return ((time.getHours() * 60) + (time.getMinutes()));
     },
 
     timeToSeconds: function (time) {
+        if(typeof(time.getHours) === 'undefined' )
+            return 0;
         return (light.timeToMinutes(time) * 60);
     },
 
@@ -27,7 +31,6 @@ var light = module.exports = {
     },
 
     calculateBrightness: function (channel, maxBrightness, currentTime, onTime, offTime, rampTime) {
-
 
         var rampTimeInSeconds = light.timeToSeconds(rampTime),
             onTimeInSeconds = light.timeToSeconds(onTime),
