@@ -60,6 +60,7 @@ var light = module.exports = {
             if (currentTimeInSeconds > onTimeInSeconds &&
                 currentTimeInSeconds < (onTimeInSeconds + rampTimeInSeconds)) {
                 finalBrightness = parseInt(((currentTimeInSeconds - rampTimeInSeconds) / rampTimeInSeconds) * maxFullBrightness);
+                console.log( parseInt(light.mapLight(finalBrightness, 0, 4095, minFullBrightness, maxBrightness)));
                 return parseInt(light.mapLight(finalBrightness, 0, 4095, minFullBrightness, maxBrightness));
 
             }
@@ -68,6 +69,7 @@ var light = module.exports = {
             else if (currentTimeInSeconds < offTimeInSeconds &&
                 currentTimeInSeconds > (offTimeInSeconds - rampTimeInSeconds)) {
                 finalBrightness = parseInt(((offTimeInSeconds - currentTimeInSeconds) / rampTimeInSeconds) * maxFullBrightness);
+                console.log( parseInt(light.mapLight(finalBrightness, 0, 4095, minFullBrightness, maxFullBrightness)));
                 return parseInt(light.mapLight(finalBrightness, 0, 4095, minFullBrightness, maxFullBrightness));
 
             }
