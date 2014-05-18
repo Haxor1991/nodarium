@@ -9,13 +9,13 @@ var light = module.exports = {
     lights: {},
 
     timeToMinutes: function (time) {
-        if(typeof(time.getHours) === 'undefined' )
+        if(typeof(time) === 'undefined' )
             return 0;
         return ((time.getHours() * 60) + (time.getMinutes()));
     },
 
     timeToSeconds: function (time) {
-        if(typeof(time.getHours) === 'undefined' )
+        if(typeof(time) === 'undefined' )
             return 0;
         return (light.timeToMinutes(time) * 60);
     },
