@@ -51,11 +51,12 @@ var light = module.exports = {
         if (currentTimeInSeconds < onTimeInSeconds ||
             currentTimeInSeconds > offTimeInSeconds) {
             // night mode
-            return minFullBrightness;
+            console.log('night');
+            return parseInt(minFullBrightness);
 
         } else {
             // day mode
-
+            console.log('day');
             // are we ramping up?
             if (currentTimeInSeconds > onTimeInSeconds &&
                 currentTimeInSeconds < (onTimeInSeconds + rampTimeInSeconds)) {
@@ -75,7 +76,7 @@ var light = module.exports = {
             }
             // constant state
             else {
-                return maxFullBrightness;
+                return parseInt(maxFullBrightness);
             }
 
         }
