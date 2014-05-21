@@ -57,7 +57,7 @@ module.exports = function (Lights, app, auth, database) {
 
         socket.on('Update Light Channel', function(data){
 
-            console.log('updating light channel', data);
+//            console.log('updating light channel', data);
             // get channel info / validate
 
             // talk to arduino
@@ -67,7 +67,7 @@ module.exports = function (Lights, app, auth, database) {
 
         socket.on('Update All Channels', function(data){
 
-            console.log('Update All Channels', data);
+//            console.log('Update All Channels', data);
             // get channel info / validate
 
             // talk to arduino

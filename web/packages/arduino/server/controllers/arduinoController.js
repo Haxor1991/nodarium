@@ -51,17 +51,17 @@ var light = module.exports = {
         if (currentTimeInSeconds < onTimeInSeconds ||
             currentTimeInSeconds > offTimeInSeconds) {
             // night mode
-            console.log('night');
+//            console.log('night');
             return parseInt(minFullBrightness);
 
         } else {
             // day mode
-            console.log('day');
+//            console.log('day');
             // are we ramping up?
             if (currentTimeInSeconds > onTimeInSeconds &&
                 currentTimeInSeconds < (onTimeInSeconds + rampTimeInSeconds)) {
                 finalBrightness = parseInt(((currentTimeInSeconds - rampTimeInSeconds) / rampTimeInSeconds) * maxFullBrightness);
-                console.log( parseInt(light.mapLight(finalBrightness, 0, 4095, minFullBrightness, maxBrightness)));
+//                console.log( parseInt(light.mapLight(finalBrightness, 0, 4095, minFullBrightness, maxBrightness)));
                 return parseInt(light.mapLight(finalBrightness, 0, 4095, minFullBrightness, maxBrightness));
 
             }
@@ -70,7 +70,7 @@ var light = module.exports = {
             else if (currentTimeInSeconds < offTimeInSeconds &&
                 currentTimeInSeconds > (offTimeInSeconds - rampTimeInSeconds)) {
                 finalBrightness = parseInt(((offTimeInSeconds - currentTimeInSeconds) / rampTimeInSeconds) * maxFullBrightness);
-                console.log( parseInt(light.mapLight(finalBrightness, 0, 4095, minFullBrightness, maxFullBrightness)));
+//                console.log( parseInt(light.mapLight(finalBrightness, 0, 4095, minFullBrightness, maxFullBrightness)));
                 return parseInt(light.mapLight(finalBrightness, 0, 4095, minFullBrightness, maxFullBrightness));
 
             }
@@ -110,7 +110,7 @@ var light = module.exports = {
     sendLightConfigToArduino: function (app, data) {
 
         // talk to arduino
-        console.log(data);
+//        console.log(data);
         var pwmChannel = (data.pwmChip === 'pwm1') ? '00' : '01';
         app.writeAndDrain('C04|'+pwmChannel+'|'+light.pad(data.channel,2)+'|'+light.pad(data.value,4)+'\n');
 
