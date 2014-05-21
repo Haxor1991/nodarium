@@ -31,7 +31,3 @@ exports.render = function(req, res) {
 
     });
 };
-
-exports.greetings = function(){
-    console.log('hello there');
-};

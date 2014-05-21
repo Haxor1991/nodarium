@@ -7,7 +7,7 @@ module.exports = function(app) {
 
 
     // Home route
-    console.log('need to include some controllers in here...');
+//    console.log('need to include some controllers in here...');
 
 
     app.get('/arduino/test',function(req,res){
@@ -17,12 +17,12 @@ module.exports = function(app) {
 
 
         serialPort.on('open',function(err){
-            console.log('hi');
+//            console.log('hi');
             writeAndDrain('C00\n');
 
         })
             .on('data',function(data){
-                console.log('From arduino router:',JSON.parse(data));
+//                console.log('From arduino router:',JSON.parse(data));
             });
 
 
@@ -36,15 +36,15 @@ module.exports = function(app) {
 
         })
         .put(function(req, res){
-            console.log('PUT', req.body);
+//            console.log('PUT', req.body);
             res.jsonp({'done': 'ok'});
         })
         .delete(function(req, res){
-            console.log('DELETE', req.body);
+//            console.log('DELETE', req.body);
             res.jsonp({'done': 'ok'});
         })
         .post(function(req, res){
-            console.log('POST', req.body);
+//            console.log('POST', req.body);
             res.jsonp({'done': 'ok'});
         });
 

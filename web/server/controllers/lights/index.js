@@ -2,7 +2,9 @@
 
 var lights = {
     'turnOn': function () {
-        console.log('turning on light');
+//
+//
+
     }
 };
 
