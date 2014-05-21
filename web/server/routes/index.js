@@ -13,7 +13,7 @@ module.exports = function(app) {
 
     // SOCKET IO ROUTES / Events
     io.sockets.on('connection', function(){
-        index.greetings();
+//        index.greetings();
     });
 
 
