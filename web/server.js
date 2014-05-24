@@ -3,6 +3,7 @@
 /**
  * Module dependencies.
  */
+
 var mongoose = require('mongoose'),
     passport = require('passport'),
     logger = require('mean-logger'),
@@ -60,17 +61,6 @@ app.io.sockets.on('connection', function (socket) {
 app.serialPort = serialPort;
 app.writeAndDrain = writeAndDrain;
 app.serialPort.open(function (err) {
-
-//    // General Event listener
-//    app.serialPort.on('open', function(){
-//        app.serialPort.on('data', function(data) {
-//            console.log('data received: ' + data);
-//        });
-//
-//    })
-//    .on('error', function(err){
-//            console.log('ERROR: ', err);
-//        });
 
     console.log(err);
 

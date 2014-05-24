@@ -9,19 +9,18 @@ var light = module.exports = {
     lights: {},
 
     timeToMinutes: function (time) {
-        if(typeof(time) === 'undefined' )
+        if (typeof(time) === 'undefined')
             return 0;
         return ((time.getHours() * 60) + (time.getMinutes()));
     },
 
     timeToSeconds: function (time) {
-        if(typeof(time) === 'undefined' )
+        if (typeof(time) === 'undefined')
             return 0;
         return (light.timeToMinutes(time) * 60);
     },
 
     mapLight: function (x, in_min, in_max, out_min, out_max) {
-
         return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
     },
 
@@ -44,33 +43,31 @@ var light = module.exports = {
         minFullBrightness = channel.night * ( maxBrightness.night / 100);
         maxFullBrightness = channel.day * ( maxBrightness.day / 100);
 
-        // if we are in ramping time
-
-
         // Ramping is only done during the day time
         if (currentTimeInSeconds < onTimeInSeconds ||
             currentTimeInSeconds > offTimeInSeconds) {
             // night mode
-//            console.log('night');
             return parseInt(minFullBrightness);
 
         } else {
+
+
             // day mode
-//            console.log('day');
             // are we ramping up?
+
             if (currentTimeInSeconds > onTimeInSeconds &&
                 currentTimeInSeconds < (onTimeInSeconds + rampTimeInSeconds)) {
-                finalBrightness = parseInt(((currentTimeInSeconds - rampTimeInSeconds) / rampTimeInSeconds) * maxFullBrightness);
-//                console.log( parseInt(light.mapLight(finalBrightness, 0, 4095, minFullBrightness, maxBrightness)));
-                return parseInt(light.mapLight(finalBrightness, 0, 4095, minFullBrightness, maxBrightness));
+                finalBrightness = parseInt(((currentTimeInSeconds - onTimeInSeconds) / rampTimeInSeconds) * maxFullBrightness);
+                finalBrightness = parseInt(light.mapLight(finalBrightness, 0, 4095, minFullBrightness, maxFullBrightness));
+                return finalBrightness;
 
             }
 
             // are we ramping down?
+
             else if (currentTimeInSeconds < offTimeInSeconds &&
                 currentTimeInSeconds > (offTimeInSeconds - rampTimeInSeconds)) {
                 finalBrightness = parseInt(((offTimeInSeconds - currentTimeInSeconds) / rampTimeInSeconds) * maxFullBrightness);
-//                console.log( parseInt(light.mapLight(finalBrightness, 0, 4095, minFullBrightness, maxFullBrightness)));
                 return parseInt(light.mapLight(finalBrightness, 0, 4095, minFullBrightness, maxFullBrightness));
 
             }
@@ -86,6 +83,8 @@ var light = module.exports = {
 
 
     updateLights: function (app) {
+
+
         Light.find().exec(function (err, lights) {
             if (!err) {
                 _(lights).forEach(function (lightFixture) {
@@ -98,7 +97,7 @@ var light = module.exports = {
                     _(lightFixture.channels).forEach(function (channel) {
                         var value = light.calculateBrightness(channel, lightFixture.lightIntensity, currentTime, onTime, offTime, rampTime);
 
-                        light.sendLightConfigToArduino(app, {'pwmChip': channel.pinsGroup, 'channel': channel.pin, 'value':value});
+                        light.sendLightConfigToArduino(app, {'pwmChip': channel.pinsGroup, 'channel': channel.pin, 'value': value});
                     });
 
                 });
@@ -110,9 +109,8 @@ var light = module.exports = {
     sendLightConfigToArduino: function (app, data) {
 
         // talk to arduino
-//        console.log(data);
         var pwmChannel = (data.pwmChip === 'pwm1') ? '00' : '01';
-        app.writeAndDrain('C04|'+pwmChannel+'|'+light.pad(data.channel,2)+'|'+light.pad(data.value,4)+'\n');
+        app.writeAndDrain('C04|' + pwmChannel + '|' + light.pad(data.channel, 2) + '|' + light.pad(data.value, 4) + '\n');
 
     }
 };
