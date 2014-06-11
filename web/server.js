@@ -22,9 +22,10 @@ function writeAndDrain(data, callback) {
     if (app.serialConnectionStatus) {
         setTimeout(function () {
             console.log('sending data to arduino: ', data);
-
+            callback = callback || function () {
+            };
             serialPort.write(data, function (error, results) {
-                serialPort.drain();
+                serialPort.drain(callback);
             });
         }, 10);
     }
