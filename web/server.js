@@ -19,7 +19,7 @@ var mongoose = require('mongoose'),
 function writeAndDrain(data, callback) {
 
     setTimeout(function(){
-//        console.log('sending data to arduino: ', data);
+        console.log('sending data to arduino: ', data);
         callback = callback || function () {
         };
         serialPort.write(data, function (error, results) {
