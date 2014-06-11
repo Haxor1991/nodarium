@@ -22,7 +22,7 @@ module.exports = function(app) {
 
         })
             .on('data',function(data){
-//                console.log('From arduino router:',JSON.parse(data));
+                console.log('From arduino router:',(data));
             });
 
 
