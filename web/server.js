@@ -19,15 +19,16 @@ var mongoose = require('mongoose'),
 function writeAndDrain(data, callback) {
 
     console.log('What?');
-    setTimeout(function(){
-        console.log('sending data to arduino: ', data);
-        callback = callback || function () {
-        };
-        serialPort.write(data, function (error, results) {
-            serialPort.drain(callback);
-        });
-    },100);
-
+    if (app.serialConnectionStatus) {
+        setTimeout(function () {
+            console.log('sending data to arduino: ', data);
+            callback = callback || function () {
+            };
+            serialPort.write(data, function (error, results) {
+                serialPort.drain(callback);
+            });
+        }, 100);
+    }
 }
 
 /**
@@ -61,6 +62,7 @@ app.io.sockets.on('connection', function (socket) {
 
 app.serialPort = serialPort;
 app.writeAndDrain = writeAndDrain;
+app.serialConnectionStatus = false;
 app.serialPort.open(function (err) {
 
     console.log(err);
@@ -73,7 +75,7 @@ var arduinoConnection = setInterval(
         app.serialPort.open(function (err) {
             if (!err) {
 
-                app.isArduinoConnected = true;
+                app.serialConnectionStatus = true;
                 clearInterval(arduinoConnection);
             }
         });
