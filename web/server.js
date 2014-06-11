@@ -18,15 +18,13 @@ var mongoose = require('mongoose'),
 
 function writeAndDrain(data, callback) {
 
-    console.log('What?');
-//    setTimeout(function(){
-//        console.log('sending data to arduino: ', data);
-//        callback = callback || function () {
-//        };
-//        serialPort.write(data, function (error, results) {
-//            serialPort.drain(callback);
-//        });
-//    },25);
+        console.log('sending data to arduino: ', data);
+        callback = callback || function () {
+        };
+        serialPort.write(data, function (error, results) {
+            serialPort.drain(callback);
+        });
+
 
 }
 
