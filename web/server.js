@@ -35,7 +35,6 @@ app.io = io;
 
 function writeAndDrain(data, callback) {
 
-    console.log('What?');
     if (app.serialConnectionStatus) {
         setTimeout(function () {
             console.log('sending data to arduino: ', data);
@@ -44,7 +43,7 @@ function writeAndDrain(data, callback) {
             serialPort.write(data, function (error, results) {
                 serialPort.drain(callback);
             });
-        }, 10);
+        }, 25);
     }
 }
 
