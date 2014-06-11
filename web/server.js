@@ -53,9 +53,9 @@ console.log('Mean app started on port ' + config.port + ' (' + process.env.NODE_
 logger.init(app, passport, mongoose);
 
 app.io.sockets.on('connection', function (socket) {
-    socket.on('updateNumber', function (data) {
-        socket.emit('giveMeNumber', parseInt(data) + 1);
-    });
+//    socket.on('updateNumber', function (data) {
+//        socket.emit('giveMeNumber', parseInt(data) + 1);
+//    });
 });
 
 app.serialPort = serialPort;
