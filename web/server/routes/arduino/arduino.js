@@ -19,11 +19,11 @@ module.exports = function (app) {
         console.log('Serial Connection to Arduino has been established');
         writeAndDrain('C00\n');
 
-    })
-        .on('data', function (data) {
-//            console.log('From arduino router:', data);
-            console.log('received some stuff from arduino', data);
-        });
+    });
+//        .on('data', function (data) {
+////            console.log('From arduino router:', data);
+////            console.log('received some stuff from arduino', data);
+//        });
 
 
     app.route('/api/v1/arduino')
