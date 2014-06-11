@@ -17,7 +17,7 @@ module.exports = function(app) {
 
 
         serialPort.on('open',function(err){
-//            console.log('hi');
+            console.log('Serial Connection to Arduino has been established');
             writeAndDrain('C00\n');
 
         })
