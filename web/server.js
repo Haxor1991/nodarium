@@ -16,20 +16,6 @@ var mongoose = require('mongoose'),
     }, false); // this is the openImmediately flag [default is true]
 
 
-function writeAndDrain(data, callback) {
-
-    console.log('What?');
-    if (app.serialConnectionStatus) {
-        setTimeout(function () {
-            console.log('sending data to arduino: ', data);
-            callback = callback || function () {
-            };
-            serialPort.write(data, function (error, results) {
-                serialPort.drain(callback);
-            });
-        }, 10);
-    }
-}
 
 /**
  * Main application entry file.
@@ -46,6 +32,22 @@ var app = require('./server/config/system/bootstrap')(passport, db),
     io = require('socket.io').listen(server);
 //io.set('log level', 1);
 app.io = io;
+
+function writeAndDrain(data, callback) {
+
+    console.log('What?');
+    if (app.serialConnectionStatus) {
+        setTimeout(function () {
+            console.log('sending data to arduino: ', data);
+            callback = callback || function () {
+            };
+            serialPort.write(data, function (error, results) {
+                serialPort.drain(callback);
+            });
+        }, 10);
+    }
+}
+
 
 // Start the app by listening on <port>, optional hostname
 server.listen(config.port, config.hostname);
