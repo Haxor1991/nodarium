@@ -42,7 +42,7 @@ var db = mongoose.connect(config.db);
 var app = require('./server/config/system/bootstrap')(passport, db),
     server = require('http').createServer(app),
     io = require('socket.io').listen(server);
-io.set('log level', 1);
+//io.set('log level', 1);
 app.io = io;
 
 // Start the app by listening on <port>, optional hostname
