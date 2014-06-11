@@ -27,7 +27,7 @@ function writeAndDrain(data, callback) {
             serialPort.write(data, function (error, results) {
                 serialPort.drain(callback);
             });
-        }, 100);
+        }, 10);
     }
 }
 
