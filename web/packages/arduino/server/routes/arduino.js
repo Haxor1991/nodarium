@@ -48,7 +48,7 @@ module.exports = function(Arduino, app, auth, database) {
 
 
 
-    },30000);
+    },60000);
 
     // every second
     setInterval(function(){
