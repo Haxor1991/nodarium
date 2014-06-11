@@ -41,9 +41,12 @@ function writeAndDrain(data, callback) {
             callback = callback || function () {
             };
             serialPort.write(data, function (error, results) {
-                serialPort.drain(callback);
+                serialPort.drain(function(){
+                    console.log('done?');
+                    callback();
+                });
             });
-        }, 25);
+        }, 30);
     }
 }
 
