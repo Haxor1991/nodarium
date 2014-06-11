@@ -34,7 +34,8 @@ module.exports = function(Arduino, app, auth, database) {
     //  Arduino Setup
     setTimeout(function(){
         arduino.updateLights(app);
-    },1000);
+        console.log('are we crashing?');
+    },10000);
 
     //  Arduino Loop:
 
@@ -51,12 +52,6 @@ module.exports = function(Arduino, app, auth, database) {
     },60000);
 
     // every second
-    setInterval(function(){
-
-
-
-
-    },60000);
 
 
 
