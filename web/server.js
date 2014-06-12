@@ -139,7 +139,7 @@ setInterval(function(){
     }
 
 
-}, 1000);
+}, 50);
 
 
 serialPort.on('data', function (data) {
@@ -184,7 +184,7 @@ var arduinoConnection = setInterval(
                 clearInterval(arduinoConnection);
             }
         });
-    }, 50);
+    }, 1000);
 
 // Expose app
 //exports = module.exports = app;
