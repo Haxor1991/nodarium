@@ -4,6 +4,15 @@
  * Module dependencies.
  */
 
+Object.size = function(obj) {
+    var size = 0, key;
+    for (key in obj) {
+        if (obj.hasOwnProperty(key)) size++;
+    }
+    return size;
+};
+
+
 var mongoose = require('mongoose'),
     passport = require('passport'),
     logger = require('mean-logger'),
@@ -67,7 +76,7 @@ function pad(num, size) {
  */
 app.arduino.sendCommand = function(command){
 
-   console.log(app.arduino.q.length);
+   console.log(Object.size(app.arduino.q.length));
 
     var d = new Date(),
         commandObj = {'commandString': command};
@@ -119,8 +128,8 @@ setInterval(function(){
 
     if(app.arduino.sendingCommand) return;
 
-    console.log('is it working?', app.arduino.q.length, 'bla');
-    if(app.arduino.q.length > 0) {
+    console.log('is it working?', app.arduino.q.length, 'bla', Object.size(app.arduino.q.length));
+    if(Object.size(app.arduino.q) > 0) {
         console.log('form within the loop');
         for(var key in app.arduino.q) break;
         console.log(app.arduino.q[key].commandNumber);
