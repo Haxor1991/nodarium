@@ -2,30 +2,6 @@
 
 module.exports = function (app) {
 
-    var serialPort = app.serialPort;
-    var writeAndDrain = app.writeAndDrain;
-
-
-    // Home route
-//    console.log('need to include some controllers in here...');
-
-
-    app.get('/arduino/test', function (req, res) {
-        writeAndDrain('C00\n');
-    });
-
-
-    serialPort.on('open', function (err) {
-        console.log('Serial Connection to Arduino has been established');
-        writeAndDrain('C00\n');
-
-    })
-        .on('data', function (data) {
-//            console.log('From arduino router:', data);
-            console.log('received some stuff from arduino', data);
-        });
-
-
     app.route('/api/v1/arduino')
         .get(function (req, res) {
             console.log('GET', req.body);

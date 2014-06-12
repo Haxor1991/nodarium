@@ -13,7 +13,7 @@ var mongoose = require('mongoose'),
     serialPort = new SerialPort('/dev/rfcomm0', {
         baudrate: 57600,
         parser: serialport.parsers.readline('\n')
-    }, false); // this is the openImmediately flag [default is true]
+    }, true); // this is the openImmediately flag [default is true]
 
 
 
@@ -24,7 +24,20 @@ var mongoose = require('mongoose'),
 
 // Initializing system variables
 var config = require('./server/config/config');
+mongoose.connection.on('error', function(err){
+    console.log(err);
+});
+
 var db = mongoose.connect(config.db);
+
+
+// If the connection throws an error
+
+mongoose.connection.on('error',function (err) {
+    console.log('Mongoose default connection error: ' + err);
+});
+
+
 
 // Bootstrap Models, Dependencies, Routes and the app as an express app
 var app = require('./server/config/system/bootstrap')(passport, db),
@@ -32,6 +45,50 @@ var app = require('./server/config/system/bootstrap')(passport, db),
     io = require('socket.io').listen(server);
 //io.set('log level', 1);
 app.io = io;
+app.arduino = {};
+app.arduino.q = {};
+app.arduino.commandCount = 0;
+app.arduino.sendingCommand = false;
+
+/***
+ *
+ * @param commandObj
+ *
+ * {
+ *      commandString:
+ *
+ * }
+ */
+app.arduino.sendCommand = function(commandObj){
+
+   console.log(app.arduino.q.length);
+
+    var d = new Date();
+
+    var id = (commandObj.commandString+'cmd:'+ app.arduino.commandCount);
+
+    commandObj.commandNumber = app.arduino.commandCount++;
+    commandObj.timeStamp = d.getTime();
+
+    app.arduino.q[id]=commandObj;
+
+    return id;
+
+};
+
+app.arduino.verifyCommand = function(commandObj) {
+    console.log('hecking for new items');
+    var id = (commandObj.commandString+'cmd:'+ commandObj.commandNumber);
+
+    if(typeof(app.arduino.q[id]) === 'object'){
+        delete app.arduino.q[id];
+    }
+
+    console.log(app.arduino.q);
+};
+
+
+
 
 function writeAndDrain(data, callback) {
 
@@ -64,13 +121,14 @@ app.io.sockets.on('connection', function (socket) {
 app.serialPort = serialPort;
 app.writeAndDrain = writeAndDrain;
 app.serialConnectionStatus = false;
-app.serialPort.open(function (err) {
-
-    console.log(err);
 
 
-});
+
+
+
+
 app.isArduinoConnected = false;
+
 var arduinoConnection = setInterval(
     function () {
         app.serialPort.open(function (err) {

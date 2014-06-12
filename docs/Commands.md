@@ -78,3 +78,13 @@ kjkkjk
 ```
 R04|00|00|0000
 ```
+
+
+
+#Arduino Communication Protocol
+
+- a new request is being queued up in the arduino command array
+- each array is an object with the command
+- when firing the sendArduinoCommand function, the command will be added to the que.
+- when the data is coming back from the arduino, we check for the validity of the response, if it's acceptable, remove it from que, and process next item, other wise re-process the same item.
+- need to ensure we only send a command when the old one was completed.
