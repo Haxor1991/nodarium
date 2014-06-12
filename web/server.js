@@ -92,6 +92,8 @@ app.arduino.sendCommand = function(command){
 };
 
 app.arduino.verifyCommand = function(commandObj) {
+    console.log('from verify');
+    console.log(commandObj);
     var id = (commandObj.commandString+'cmd:'+ commandObj.commandNumber);
 
     console.log('id: ' + id);
