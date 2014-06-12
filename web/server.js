@@ -76,7 +76,7 @@ function pad(num, size) {
  */
 app.arduino.sendCommand = function(command){
 
-   console.log(Object.size(app.arduino.q.length));
+   console.log(Object.size(app.arduino.q));
 
     var d = new Date(),
         commandObj = {'commandString': command};
@@ -94,6 +94,8 @@ app.arduino.sendCommand = function(command){
 app.arduino.verifyCommand = function(commandObj) {
     var id = (commandObj.commandString+'cmd:'+ commandObj.commandNumber);
 
+    console.log('id: ' + id);
+    console.log(typeof(app.arduino.q[id]));
     if(typeof(app.arduino.q[id]) === 'object'){
         delete app.arduino.q[id];
 
@@ -126,7 +128,7 @@ setInterval(function(){
 
     if(app.arduino.sendingCommand) return;
 
-    console.log('is it working?', app.arduino.q.length, 'bla', Object.size(app.arduino.q.length));
+    console.log('is it working?', app.arduino.q.length, 'bla', Object.size(app.arduino.q));
     if(Object.size(app.arduino.q) > 0) {
         console.log('form within the loop');
         for(var key in app.arduino.q) break;
