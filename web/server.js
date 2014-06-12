@@ -141,6 +141,8 @@ setInterval(function(){
 
 
 serialPort.on('data', function (data) {
+
+    console.log('FROM ARDUNIO');
     console.log(data);
 
     app.arduino.verifyCommand(data);
