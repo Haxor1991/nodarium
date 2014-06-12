@@ -103,6 +103,9 @@ app.arduino.verifyCommand = function(commandObj) {
 
         // we've validated the last submission, so we are done.
         app.arduino.sendingCommand = false;
+        if(app.arduino.commandCount > 10000 ){
+            app.arduino.commandCount = 0;
+        }
 
     }
     console.log('verify response');
