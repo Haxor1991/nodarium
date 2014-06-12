@@ -184,7 +184,7 @@ var arduinoConnection = setInterval(
                 clearInterval(arduinoConnection);
             }
         });
-    }, 1000);
+    }, 50);
 
 // Expose app
 //exports = module.exports = app;
