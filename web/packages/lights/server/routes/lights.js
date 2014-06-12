@@ -50,7 +50,6 @@ module.exports = function (Lights, app, auth, database) {
     // handling light functions to the arduino
     var io = app.io;
     // var serialPort = app.serialPort;
-    var writeAndDrain = app.writeAndDrain; // used to send commands to arduino....
 
     // SOCKET IO ROUTES / Events
     io.sockets.on('connection', function(socket){
@@ -62,7 +61,7 @@ module.exports = function (Lights, app, auth, database) {
 
             // talk to arduino
             var pwmChannel = (data.pwmChip === 'pwm1') ? '00' : '01';
-            writeAndDrain('C04|'+pwmChannel+'|'+pad(data.channel,2)+'|'+pad(data.value,4)+'\n');
+            app.arduino.sendCommand('C04|'+pwmChannel+'|'+pad(data.channel,2)+'|'+pad(data.value,4));
         });
 
         socket.on('Update All Channels', function(data){
@@ -74,7 +73,7 @@ module.exports = function (Lights, app, auth, database) {
 
             for(var i = 0; i < data.channels.length; i++){
                 var pwmChannel = (data.channels[i].pwmChip === 'pwm1') ? '00' : '01';
-                writeAndDrain('C04|'+pwmChannel+'|'+pad(data.channels[i].channel,2)+'|'+pad(data.channels[i].value,4)+'\n');
+                app.arduino.sendCommand('C04|'+pwmChannel+'|'+pad(data.channels[i].channel,2)+'|'+pad(data.channels[i].value,4));
             }
         });
 

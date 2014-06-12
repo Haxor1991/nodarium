@@ -13,7 +13,7 @@ var mongoose = require('mongoose'),
     serialPort = new SerialPort('/dev/rfcomm0', {
         baudrate: 57600,
         parser: serialport.parsers.readline('\n')
-    }, true); // this is the openImmediately flag [default is true]
+    }, false); // this is the openImmediately flag [default is true]
 
 
 
@@ -72,8 +72,7 @@ app.arduino.sendCommand = function(commandObj){
 
     app.arduino.q[id]=commandObj;
 
-    return id;
-
+    console.log(app.arduino.q);
 };
 
 app.arduino.verifyCommand = function(commandObj) {
@@ -82,11 +81,19 @@ app.arduino.verifyCommand = function(commandObj) {
 
     if(typeof(app.arduino.q[id]) === 'object'){
         delete app.arduino.q[id];
+
+        // we've validated the last submission, so we are done.
+        app.arduino.sendingCommand = false;
+
     }
+
 
     console.log(app.arduino.q);
 };
 
+app.arduino.sendCommand({'commandString': 'yoyo'});
+app.arduino.sendCommand({'commandString': 'yoyo2'});
+app.arduino.sendCommand({'commandString': 'yoyo5'});
 
 
 
@@ -103,6 +110,24 @@ function writeAndDrain(data, callback) {
         }, 25);
     }
 }
+
+
+setInterval(function(){
+    // check if we are currently sending out a message... if we are wait...
+    if(app.arduino.sendingCommand) return;
+
+    for(var key in app.arduino.q) break;
+
+    writeAndDrain(app.arduino.q[key].commandString+'\n');
+
+}, 1000);
+
+
+serialPort.on('data', function (data) {
+    console.log(data);
+
+    app.arduino.verifyCommand(data);
+});
 
 
 // Start the app by listening on <port>, optional hostname
