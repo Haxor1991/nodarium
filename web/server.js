@@ -73,11 +73,11 @@ app.arduino.sendCommand = function(command){
 
     app.arduino.q[id]=commandObj;
 
+    console.log('adding something...');
     console.log(app.arduino.q);
 };
 
 app.arduino.verifyCommand = function(commandObj) {
-    console.log('hecking for new items');
     var id = (commandObj.commandString+'cmd:'+ commandObj.commandNumber);
 
     if(typeof(app.arduino.q[id]) === 'object'){
