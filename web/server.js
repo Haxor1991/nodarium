@@ -59,11 +59,12 @@ app.arduino.sendingCommand = false;
  *
  * }
  */
-app.arduino.sendCommand = function(commandObj){
+app.arduino.sendCommand = function(command){
 
    console.log(app.arduino.q.length);
 
-    var d = new Date();
+    var d = new Date(),
+        commandObj = {'commandString': command};
 
     var id = (commandObj.commandString+'cmd:'+ app.arduino.commandCount);
 
@@ -91,11 +92,6 @@ app.arduino.verifyCommand = function(commandObj) {
     console.log(app.arduino.q);
 };
 
-app.arduino.sendCommand({'commandString': 'yoyo'});
-app.arduino.sendCommand({'commandString': 'yoyo2'});
-app.arduino.sendCommand({'commandString': 'yoyo5'});
-
-
 
 function writeAndDrain(data, callback) {
 
@@ -116,11 +112,14 @@ setInterval(function(){
     // check if we are currently sending out a message... if we are wait...
     if(app.arduino.sendingCommand) return;
 
-    for(var key in app.arduino.q) break;
+    if(app.arduino.q.length > 0) {
+        for(var key in app.arduino.q) break;
 
-    writeAndDrain(app.arduino.q[key].commandString+'\n');
+        writeAndDrain(app.arduino.q[key].commandString+'\n');
+    }
 
-}, 1000);
+
+}, 25);
 
 
 serialPort.on('data', function (data) {
