@@ -147,7 +147,7 @@ serialPort.on('data', function (data) {
     console.log('FROM ARDUNIO');
     console.log(data);
 
-    app.arduino.verifyCommand(data);
+    app.arduino.verifyCommand(JSON.parse(data));
 });
 
 
