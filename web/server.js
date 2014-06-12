@@ -118,7 +118,7 @@ setInterval(function(){
 
     if(app.arduino.q.length > 0) {
         for(var key in app.arduino.q) break;
-        console.log("iterator");
+        console.log('iterator');
         console.log(app.arduino.q[key].commandNumber);
         writeAndDrain(pad(app.arduino.q[key].commandNumber,5)+app.arduino.q[key].commandString+'\n');
     }
