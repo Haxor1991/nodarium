@@ -50,6 +50,12 @@ app.arduino.q = {};
 app.arduino.commandCount = 0;
 app.arduino.sendingCommand = false;
 
+function pad(num, size) {
+    var s = '000000000' + num;
+    return s.substr(s.length-size);
+}
+
+
 /***
  *
  * @param commandObj
@@ -114,7 +120,7 @@ setInterval(function(){
 
     if(app.arduino.q.length > 0) {
         for(var key in app.arduino.q) break;
-
+        console.log(app.arduino.q[key]);
         writeAndDrain(app.arduino.q[key].commandString+'\n');
     }
 
