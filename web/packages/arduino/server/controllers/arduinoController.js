@@ -110,7 +110,7 @@ var light = module.exports = {
 
         // talk to arduino
         var pwmChannel = (data.pwmChip === 'pwm1') ? '00' : '01';
-        app.writeAndDrain('C04|' + pwmChannel + '|' + light.pad(data.channel, 2) + '|' + light.pad(data.value, 4) + '\n');
+        app.arduino.sendCommand('C04|' + pwmChannel + '|' + light.pad(data.channel, 2) + '|' + light.pad(data.value, 4));
 
     }
 };
