@@ -50,10 +50,10 @@ app.arduino.q = {};
 app.arduino.commandCount = 0;
 app.arduino.sendingCommand = false;
 
-//function pad(num, size) {
-//    var s = '000000000' + num;
-//    return s.substr(s.length-size);
-//}
+function pad(num, size) {
+    var s = '000000000' + num;
+    return s.substr(s.length-size);
+}
 
 
 /***
@@ -93,8 +93,6 @@ app.arduino.verifyCommand = function(commandObj) {
         app.arduino.sendingCommand = false;
 
     }
-
-
     console.log(app.arduino.q);
 };
 
@@ -120,8 +118,9 @@ setInterval(function(){
 
     if(app.arduino.q.length > 0) {
         for(var key in app.arduino.q) break;
-        console.log(app.arduino.q[key]);
-        writeAndDrain(app.arduino.q[key].commandString+'\n');
+        console.log("iterator");
+        console.log(app.arduino.q[key].commandNumber);
+        writeAndDrain(pad(app.arduino.q[key].commandNumber,5)+app.arduino.q[key].commandString+'\n');
     }
 
 
