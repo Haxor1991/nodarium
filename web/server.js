@@ -119,7 +119,7 @@ setInterval(function(){
 
     if(app.arduino.sendingCommand) return;
 
-    console.log('is it working?', app.arduino.q.length);
+    console.log('is it working?', app.arduino.q.length, 'bla');
     if(app.arduino.q.length > 0) {
         console.log('form within the loop');
         for(var key in app.arduino.q) break;
