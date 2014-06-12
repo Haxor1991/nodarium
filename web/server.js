@@ -125,16 +125,12 @@ function writeAndDrain(data, callback) {
 
 
 setInterval(function(){
-    console.log('itereator');
     // check if we are currently sending out a message... if we are wait...
 
     if(app.arduino.sendingCommand) return;
 
-    console.log('is it working?', app.arduino.q.length, 'bla', Object.size(app.arduino.q));
     if(Object.size(app.arduino.q) > 0) {
-        console.log('form within the loop');
         for(var key in app.arduino.q) break;
-        console.log(app.arduino.q[key].commandNumber);
         writeAndDrain(pad(app.arduino.q[key].commandNumber,5)+app.arduino.q[key].commandString+'\n');
     }
 
@@ -143,10 +139,6 @@ setInterval(function(){
 
 
 serialPort.on('data', function (data) {
-
-    console.log('FROM ARDUNIO');
-    console.log(data);
-
     app.arduino.verifyCommand(JSON.parse(data));
 });
 
