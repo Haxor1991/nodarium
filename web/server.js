@@ -90,6 +90,7 @@ app.arduino.sendCommand = function(command){
 
 app.arduino.verifyCommand = function(commandObj) {
 
+    var timeStamp = new Date().toLocaleString();
     var id = (commandObj.commandString+'cmd:'+ commandObj.commandNumber);
 
     if(typeof(app.arduino.q[id]) === 'object'){
@@ -97,18 +98,25 @@ app.arduino.verifyCommand = function(commandObj) {
         if(typeof(commandObj.command) === 'undefined' )
             return;
 
+
         switch (commandObj.command) {
             case '01':  // temps
-                console.log('Getting temps for prod ' + commandObj.sensorType + ':' +commandObj.sensorNumber + ': '+commandObj.temperature);
+                console.log(timeStamp+': Getting temps for prod ' + commandObj.sensorType + ':' +commandObj.sensorNumber + ': '+commandObj.temperature);
                 break;
 
             case '02':  // humidity
+                console.log(timeStamp+': getting humidity level '+ commandObj.pwmchannel + 'on chip '+commandObj.pwmChannel+', new value is: '+commandObj.intensity);
                 break;
 
             case '03':  // water level
+                console.log(timeStamp+': Getting water level');
+
                 break;
 
+
             case '04':  // lights
+                console.log(timeStamp+': Updating light channel '+ commandObj.pwmchannel + 'on chip '+commandObj.pwmChannel+', new value is: '+commandObj.intensity);
+
                 break;
         }
 
@@ -127,7 +135,6 @@ app.arduino.verifyCommand = function(commandObj) {
 function writeAndDrain(data, callback) {
 
     if (app.serialConnectionStatus) {
-            console.log('sending data to arduino: ', data);
             callback = callback || function () {
             };
             serialPort.write(data, function (error, results) {
