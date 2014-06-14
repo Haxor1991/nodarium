@@ -90,13 +90,29 @@ app.arduino.sendCommand = function(command){
 };
 
 app.arduino.verifyCommand = function(commandObj) {
-    console.log('from verify');
-    console.log(commandObj);
+
     var id = (commandObj.commandString+'cmd:'+ commandObj.commandNumber);
 
-    console.log('id: ' + id);
-    console.log(typeof(app.arduino.q[id]));
     if(typeof(app.arduino.q[id]) === 'object'){
+
+        if(typeof(commandObj.command) == 'undefined' )
+            return;
+
+        switch (commandObj.command) {
+            case '01':  // temps
+                console.log('Getting temps for prod ' + commandObj.sensorType + ':' +commandObj.sensorNumber + ': '+commandObj.temperature);
+                break;
+
+            case '02':  // humidity
+                break;
+
+            case '03':  // water level
+                break;
+
+            case '04':  // lights
+                break;
+        }
+
         delete app.arduino.q[id];
 
         // we've validated the last submission, so we are done.
