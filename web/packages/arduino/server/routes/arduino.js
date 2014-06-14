@@ -38,6 +38,10 @@ module.exports = function(Arduino, app, auth, database) {
 
     //  Arduino Loop:
 
+    setInterval(function(){
+        app.arduino.sendCommand('C01|01|00');
+    },60000);
+
     // every second
     setInterval(function(){
 

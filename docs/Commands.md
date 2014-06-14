@@ -15,13 +15,18 @@ Command Number, yupyup text.
 R00|yupyup
 ```
 
-##01 -- Read Temperature Prob
+##01 -- Get Temperature
 *Perameters:*
-Prob number as defined in probes array in the arduino sketch
+Sensor type:
+- 00: DHT
+- 01: 1Wire - Tanks
+- 02: 1Wire - Mixing Stations
+
+Sensor Number: 00-99
 
 Sample Command:
 ```
-C01|00
+C01|01|00 // get the temperature from sensor 0 in the 1Wire Tanks array.
 ```
 
 *Returns:*
@@ -30,13 +35,16 @@ Command Number, probe number, temperature in celcius.
 R01|00|25.6
 ```
 
-##02 - Read Temperature from humidity sensor
+##02 - Get Humidity
 *Perameters:*
-Humidity sensor number as defined in humidity sensors array in the arduino sketch.
+Sensor type:
+- 00: DHT
+
+Sensor Number: 00-99
 
 Sample Command:
 ```
-C02|00
+C02|00|00 // get the first defined DHT sensor from the DHT sensor array.
 ```
 
 *Returns:*
@@ -45,7 +53,7 @@ Command Number, probe number, temperature in celcius.
 R02|00|25.6
 ```
 
-###03 - Read Humidity from humidity sensor
+###03 - Get Water Level
 *Perameters:*
 Humidity sensor number as defined in humidity sensors array in the arduino sketch.
 
