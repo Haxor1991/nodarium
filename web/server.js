@@ -101,7 +101,6 @@ app.arduino.verifyCommand = function(commandObj) {
 
         switch (commandObj.command) {
             case '01':  // temps
-                console.log(commandObj);
                 console.log(timeStamp+': Getting temps for prod ' + commandObj.sensorType + ':' +commandObj.sensorNumber + ': '+commandObj.temperature);
                 break;
 
