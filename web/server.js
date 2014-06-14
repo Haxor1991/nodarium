@@ -115,14 +115,12 @@ app.arduino.verifyCommand = function(commandObj) {
 function writeAndDrain(data, callback) {
 
     if (app.serialConnectionStatus) {
-        setTimeout(function () {
             console.log('sending data to arduino: ', data);
             callback = callback || function () {
             };
             serialPort.write(data, function (error, results) {
                 serialPort.drain(callback);
             });
-        }, 25);
     }
 }
 
