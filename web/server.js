@@ -95,7 +95,7 @@ app.arduino.verifyCommand = function(commandObj) {
 
     if(typeof(app.arduino.q[id]) === 'object'){
 
-        if(typeof(commandObj.command) == 'undefined' )
+        if(typeof(commandObj.command) === 'undefined' )
             return;
 
         switch (commandObj.command) {
