@@ -1,0 +1,43 @@
+<div class="" data-ng-controller="SensorsController">
+
+    <nav class="navbar navbar-default" role="navigation">
+        <div class="container-fluid">
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div id="lights-list">
+                <ul class="nav navbar-nav">
+                    <li ng-repeat="light in lights"><a class="" ng-click="setSelectedLight(light)">
+                        {{ light.title }}
+                    </a></li>
+
+                </ul>
+
+                <ul class="nav navbar-nav navbar-right">
+
+                    <li>
+                        <a ng-click="addLightFixture()"><span class="glyphicon glyphicon-plus"></span>Add a
+                            Light Fixture
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+
+
+    <div class="">
+        <div class="panel panel-default">
+            <div class="panel-heading clearfix">
+
+                <h2 class="panel-title">Add New Sensor</h2>
+
+            </div>
+            <div class="panel-body">
+
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. At, consequatur debitis dicta excepturi exercitationem facere in, iste iure magnam magni natus nostrum officiis quibusdam quis repellat repudiandae sapiente sequi, vero!</p>
+            </div>
+        </div>
+    </div>
+</div>

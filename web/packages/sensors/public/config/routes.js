@@ -26,6 +26,8 @@ angular.module('mean').config(['$stateProvider',
 
         $stateProvider
 
+
+            // Admin Facing routes
             .state('settings.sensors', {
             url: '/sensors',
             templateUrl: 'sensors/views/settings/index.html',
@@ -34,6 +36,15 @@ angular.module('mean').config(['$stateProvider',
                 }
             })
 
+            .state('settings.sensors.add', {
+                url: '/add',
+                templateUrl: 'sensors/views/settings/add.html',
+                resolve: {
+                    loggedin: checkLoggedin
+                }
+            })
+
+            // public facing routes
             .state('dashboard.sensors', {
                 url: '/sensors',
                 templateUrl: 'sensors/views/settings/index.html',
