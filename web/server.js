@@ -101,6 +101,7 @@ app.arduino.verifyCommand = function(commandObj) {
 
         switch (commandObj.command) {
             case '01':  // temps
+                console.log(commandObj);
                 console.log(timeStamp+': Getting temps for prod ' + commandObj.sensorType + ':' +commandObj.sensorNumber + ': '+commandObj.temperature);
                 break;
 
@@ -115,7 +116,7 @@ app.arduino.verifyCommand = function(commandObj) {
 
 
             case '04':  // lights
-                console.log(timeStamp+': Updating light channel '+ commandObj.pwmchannel + 'on chip '+commandObj.pwmChannel+', new value is: '+commandObj.intensity);
+                console.log(timeStamp+': Updating light channel '+ commandObj.pwmchannel + ' on chip '+commandObj.pwmChip+', new value is: '+commandObj.intensity);
 
                 break;
         }
