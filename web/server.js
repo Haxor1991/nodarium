@@ -76,8 +76,6 @@ function pad(num, size) {
  */
 app.arduino.sendCommand = function(command){
 
-   console.log(Object.size(app.arduino.q));
-
     var d = new Date(),
         commandObj = {'commandString': command};
 
@@ -108,7 +106,6 @@ app.arduino.verifyCommand = function(commandObj) {
         }
 
     }
-    console.log('verify response');
 };
 
 
@@ -136,7 +133,7 @@ setInterval(function(){
     }
 
 
-}, 50);
+}, 100);
 
 
 serialPort.on('data', function (data) {
