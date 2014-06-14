@@ -2,13 +2,13 @@
 
 angular.module('mean').config(['$stateProvider',
     function ($stateProvider) {
-        // Check if the user is connected
-        var checkLoggedin = function($q, $timeout, $http, $location) {
+        // Check if the user is logged in
+        var checkLoggedin = function ($q, $timeout, $http, $location) {
             // Initialize a new promise
             var deferred = $q.defer();
 
             // Make an AJAX call to check if the user is logged in
-            $http.get('/loggedin').success(function(user) {
+            $http.get('/loggedin').success(function (user) {
                 // Authenticated
                 if (user !== '0') $timeout(deferred.resolve);
 
@@ -27,7 +27,10 @@ angular.module('mean').config(['$stateProvider',
 
             .state('settings.lightschedule', {
                 url: '/lights/schedule',
-                templateUrl: 'lights/views/lightSchedule.html'
+                templateUrl: 'lights/views/lightSchedule.html',
+                resolve: {
+                    loggedin: checkLoggedin
+                }
             })
 
             .state('settings.lightFixtures', {
@@ -37,9 +40,6 @@ angular.module('mean').config(['$stateProvider',
                     loggedin: checkLoggedin
                 }
             });
-
-
-
 
 
     }
