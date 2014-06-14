@@ -86,7 +86,6 @@ app.arduino.sendCommand = function(command){
 
     app.arduino.q[id]=commandObj;
 
-    console.log('adding command:');
 };
 
 app.arduino.verifyCommand = function(commandObj) {
