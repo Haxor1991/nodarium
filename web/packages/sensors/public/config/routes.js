@@ -47,10 +47,7 @@ angular.module('mean').config(['$stateProvider',
             // public facing routes
             .state('dashboard.sensors', {
                 url: '/sensors',
-                templateUrl: 'sensors/views/settings/index.html',
-                resolve: {
-                    loggedin: checkLoggedin
-                }
+                templateUrl: 'sensors/views/settings/index.html'
             });
     }
 ]);

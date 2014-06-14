@@ -1,3 +1,74 @@
 <div class="" data-ng-controller="SensorsController">
-    <h3>Sensors Settings Index</h3>
+
+    <nav class="navbar navbar-default" role="navigation">
+        <div class="container-fluid">
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div id="lights-list">
+                <ul class="nav navbar-nav">
+                    <li ng-repeat="light in lights"><a class="" ng-click="setSelectedLight(light)">
+                        {{ light.title }}
+                    </a></li>
+
+                </ul>
+
+                <ul class="nav navbar-nav navbar-right">
+
+                    <li>
+                        <a ng-click="addLightFixture()"><span class="glyphicon glyphicon-plus"></span>Add a
+                            Light Fixture
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+
+
+    <div class="">
+        <div class="panel panel-default">
+            <div class="panel-heading clearfix">
+                <div class=" btn-group-sm pull-right" ng-show="selectedLight">
+                    <button class="btn btn-default btn-success" ng-click="saveModifiedLight()"
+                            ng-disabled="form.lightFixtureSettings.$dirty">
+                        Save Changes
+                    </button>
+                    <button class="btn btn-default btn-info" ng-click="cancelSelection()">Cancel</button>
+                    <button class="btn btn-default btn-danger" ng-click="deleteLightFixture(selectedLight)">Delete
+                        Light Fixture
+                    </button>
+
+                </div>
+
+                <h2 class="panel-title">Light Fixture Settings</h2>
+
+            </div>
+            <div class="panel-body">
+
+
+                <div ng-show="!selectedLight">
+                    <p>Select a light fixture from the menu above, or <a ng-click="addLightFixture()">create a new one</a>.</p>
+                </div>
+                <tabset ng-show="selectedLight">
+
+                    <tab heading="Fixture Settings">
+                        <ng-include src="'/lights/views/edit.html'"></ng-include>
+                    </tab>
+                    <tab heading="Color Channels">
+                        <ng-include src="'/lights/views/lightChannels.html'"></ng-include>
+                    </tab>
+                    <tab heading="Day Settings" select="enterSettingsMode()" deselect="cancelSettingsMode()">
+                        <ng-include src="'/lights/views/dayLightSettings.html'"></ng-include>
+                    </tab>
+                    <tab heading="Night Settings" select="enterSettingsMode()" deselect="cancelSettingsMode()">
+                        <ng-include src="'/lights/views/nightLightSettings.html'"></ng-include>
+                    </tab>
+                </tabset>
+
+
+            </div>
+        </div>
+    </div>
 </div>
