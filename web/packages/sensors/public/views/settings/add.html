@@ -1,43 +1,86 @@
-<div class="" data-ng-controller="SensorsController">
+<div class="panel panel-default">
+    <div class="panel-heading clearfix">
 
-    <nav class="navbar navbar-default" role="navigation">
-        <div class="container-fluid">
+        <h2 class="panel-title">Add New Sensor</h2>
 
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div id="lights-list">
-                <ul class="nav navbar-nav">
-                    <li ng-repeat="light in lights"><a class="" ng-click="setSelectedLight(light)">
-                        {{ light.title }}
-                    </a></li>
+    </div>
+    <div class="panel-body">
 
-                </ul>
+        <form action="" name="addNewSensorForm" role="form" class="form-horizontal" novalidate>
+    <h3>Sensor ID  {{ sensorId }} </h3>
 
-                <ul class="nav navbar-nav navbar-right">
+            <h3>Scope</h3>
+            {{ scope }}
 
-                    <li>
-                        <a ng-click="addLightFixture()"><span class="glyphicon glyphicon-plus"></span>Add a
-                            Light Fixture
-                        </a>
-                    </li>
-                </ul>
+            <div class="form-group">
+                <label for="sensorTitle" class="col-sm-3 control-label">Display Title</label>
+
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" ng-model="sensorTitle" id="sensorTitle" required/>
+                </div>
             </div>
-            <!-- /.navbar-collapse -->
-        </div>
-        <!-- /.container-fluid -->
-    </nav>
 
+            <div class="form-group">
 
-    <div class="">
-        <div class="panel panel-default">
-            <div class="panel-heading clearfix">
-
-                <h2 class="panel-title">Add New Sensor</h2>
+                <div class="col-sm-offset-3 col-sm-3">
+                    <div class="checkbox">
+                        <label >
+                            <input type="checkbox" type="checkbox" ng-model="showOnDashboard" id="showOnDashboard"> <strong>Show on Dashboard</strong>
+                        </label>
+                    </div>
+                </div>
 
             </div>
-            <div class="panel-body">
 
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. At, consequatur debitis dicta excepturi exercitationem facere in, iste iure magnam magni natus nostrum officiis quibusdam quis repellat repudiandae sapiente sequi, vero!</p>
+            <div class="form-group">
+                <label for="logIngerval" class="col-sm-3 control-label">Log Interval (Minutes)</label>
+
+                <div class="col-sm-9">
+                    <input type="number" class="form-control" ng-model="logIngerval" id="logIngerval" min="0" required/>
+                </div>
             </div>
-        </div>
+
+
+            <div class="form-group">
+                <label for="sensorTypeSelect" class="col-sm-3 control-label">Sensor Type</label>
+
+                <div class="col-sm-9">
+                    <select name="" class="form-control" id="sensorTypeSelect" ng-model="sensorType" required>
+                        <option value="" selected>-- Please Select A Sensor Type --</option>
+                        <option value="dht">DHT Humidity/Temp</option>
+                        <option value="1wire-ds18b20">Temperature</option>
+                    </select>
+                </div>
+            </div>
+
+
+
+            <div class="form-group"  ng-show="sensorType == '1wire-ds18b20'">
+                <label for="oneWireBus" class="col-sm-3 control-label">One Wire Bus</label>
+
+                <div class="col-sm-9">
+                    <select name="" class="form-control" id="oneWireBus" ng-model="oneWireBus" >
+                        <option value="" selected>-- Please Select Sensor Bus --</option>
+                        <option value="tanks">Tanks</option>
+                        <option value="mixing-station">Mixing Station</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group"  ng-show="sensorType == 'dht' || sensorType == '1wire-ds18b20'">
+                <label for="sensorNumber" class="col-sm-3 control-label">Sensor Number</label>
+
+                <div class="col-sm-9">
+                    <input type="number" class="form-control" ng-model="sensorNumber" id="sensorNumber" min="0" />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-sm-offset-3 col-sm-9">
+                    <button type="submit" class="btn btn-default" ng-disabled="!addNewSensorForm.$valid"  >Add Sensor</button>
+                </div>
+            </div>
+
+        </form>
     </div>
 </div>

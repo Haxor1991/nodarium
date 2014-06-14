@@ -44,6 +44,23 @@ angular.module('mean').config(['$stateProvider',
                 }
             })
 
+            .state('settings.sensors.edit', {
+                url: '/edit/:sensorId',
+                controller:  'SensorsController',
+                templateUrl: 'sensors/views/settings/add.html',
+                resolve: {
+                    loggedin: checkLoggedin
+                }
+            })
+
+            .state('settings.sensors.list', {
+                url: '/',
+                templateUrl: 'sensors/views/settings/list.html',
+                resolve: {
+                    loggedin: checkLoggedin
+                }
+            })
+
             // public facing routes
             .state('dashboard.sensors', {
                 url: '/sensors',

@@ -19,7 +19,7 @@ Sensors.register(function(app, auth, database) {
     //We are adding a link to the main menu for all authenticated users
     Sensors.menus.add({
         title: 'Sensors',
-        link: 'settings.sensors',
+        link: 'settings.sensors.list',
         roles: ['authenticated'],
         menu: 'settings'
     });
