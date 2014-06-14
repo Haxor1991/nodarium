@@ -43,7 +43,7 @@ module.exports = function(Arduino, app, auth, database) {
         app.arduino.sendCommand('C01|01|00');
         app.arduino.sendCommand('C01|01|01');
         app.arduino.sendCommand('C01|01|02');
-    },60000);
+    },5000);
 
     // every second
     setInterval(function(){

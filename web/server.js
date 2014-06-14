@@ -110,12 +110,11 @@ app.arduino.verifyCommand = function(commandObj) {
 
             case '03':  // water level
                 console.log(timeStamp+': Getting water level');
-
                 break;
 
 
             case '04':  // lights
-                console.log(timeStamp+': Updating light channel '+ commandObj.pwmchannel + ' on chip '+commandObj.pwmChip+', new value is: '+commandObj.intensity);
+                //console.log(timeStamp+': Updating light channel '+ commandObj.pwmchannel + ' on chip '+commandObj.pwmChip+', new value is: '+commandObj.intensity);
 
                 break;
         }
