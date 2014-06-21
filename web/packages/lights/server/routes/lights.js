@@ -81,8 +81,4 @@ module.exports = function (Lights, app, auth, database) {
 
 
 
-
-
-
-
 };

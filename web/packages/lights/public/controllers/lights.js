@@ -101,20 +101,6 @@ angular.module('mean').controller('LightsController', ['$scope', 'Global', 'Ligh
 
             });
 
-
-//            var data = {
-//
-//                channels: [
-////                {
-//                    pwmChip: $scope.selectedLight.channels[channel].pinGroup,
-//                    channel: $scope.selectedLight.channels[channel].pin,
-//                    value: parseInt($scope.selectedLight.channels[channel][day] * $scope.selectedLight.lightIntensity[day] / 100)
-//                }
-//
-//            ]
-
-
-//        };
         sockets.emit('Update All Channels', data);
     };
 }

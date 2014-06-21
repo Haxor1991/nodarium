@@ -1,5 +1,7 @@
 'use strict';
 
+var sensors = require('../controllers/sensor.js');
+
 // The Package is past automatically as first parameter
 module.exports = function(Sensors, app, auth, database) {
 
@@ -23,4 +25,35 @@ module.exports = function(Sensors, app, auth, database) {
             res.send(html);
         });
     });
+
+
+
+
+
+
+    // Basic sensor api
+    app.route('/api/v1/sensors')
+        .get(sensors.allSensors)
+        .post(auth.requiresLogin, sensors.createSensor);
+
+    app.route('/api/v1/sensors/readings/:sensorMachineName/:reading?')
+        .get(sensors.getAllReadings)
+        .post(auth.requiresLogin,sensors.createRecord);
+
+
+    app.route('/api/v1/sensors/:sensorMachineName')
+        .get(sensors.getSensor)
+        .put(auth.requiresLogin, sensors.updateSensor)
+        .delete(auth.requiresLogin, sensors.deleteSensor);
+
+//    app.param('sensorMachineName',sensors.getSensor);
+//    app.param('time',sensors.getSensor);
+
+
+    // sensor readings
+
+
+
+
+
 };

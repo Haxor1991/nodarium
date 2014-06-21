@@ -6,8 +6,8 @@
     </div>
     <div class="panel-body">
 
-        <form action="" name="addNewSensorForm" role="form" class="form-horizontal" novalidate>
-    <h3>Sensor ID  {{ sensorId }} </h3>
+        <form action="" name="addNewSensorForm" role="form" class="form-horizontal" novalidate ng-submit="saveNewSensor()">
+    <h3>Sensor ID  {{ sensors }} </h3>
 
             <h3>Scope</h3>
             {{ scope }}
@@ -16,7 +16,17 @@
                 <label for="sensorTitle" class="col-sm-3 control-label">Display Title</label>
 
                 <div class="col-sm-9">
-                    <input type="text" class="form-control" ng-model="sensorTitle" id="sensorTitle" required/>
+                    <input type="text" class="form-control" ng-model="sensor.displayTitle" id="sensorTitle" ng-change="generateMachineName()" required/>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="sensorTitle" class="col-sm-3 control-label">Machine Name</label>
+
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" ng-model="sensor.machineName "  unique-sensor-machine-name id="machineName" ng-change="verifyMachineName()" required/>
+                    <p class="help-block">only lower case, numbers, and '-' are allowed</p>
+                    <div ng-show="validationErrors.machineNameNotAvailable" class="alert alert-danger">This machine name is not available, please select another one.</div>
                 </div>
             </div>
 
