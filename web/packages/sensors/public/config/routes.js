@@ -45,7 +45,7 @@ angular.module('mean').config(['$stateProvider',
             })
 
             .state('settings.sensors.edit', {
-                url: '/edit/:sensorId',
+                url: '/edit/:sensorMachineName',
                 controller:  'SensorsController',
                 templateUrl: 'sensors/views/settings/add.html',
                 resolve: {

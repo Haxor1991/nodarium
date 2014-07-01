@@ -7,20 +7,15 @@
     <div class="panel-body">
 
         <ul class="list-group">
-            <li class="list-group-item clearfix">
+            <li class="list-group-item clearfix" ng-repeat="sen in sensors">
 
-                <img class="pull-left" class="media-object" src="..." alt="...">
-                Frag Tank
+                <p class="col-sm-8">{{ sen.displayTitle }}</p>
                 <div class="btn-group-sm pull-right">
-                    <button class="btn btn-default btn-success" ui-sref="settings.sensors.edit({ sensorId:3 })">Edit(t)</button>
-                    <button class="btn btn-default btn-danger" ng-click="deleteLightFixture(selectedLight)">Delete</button>
+                    <button class="btn btn-default btn-success" ui-sref="settings.sensors.edit({ sensorMachineName: sen.machineName})">Edit(t)</button>
+                    <button class="btn btn-default btn-danger" ng-click="delete(selectedLight)">Delete</button>
 
                 </div>
             </li>
-            <li class="list-group-item">Dapibus ac facilisis in</li>
-            <li class="list-group-item">Morbi leo risus</li>
-            <li class="list-group-item">Porta ac consectetur ac</li>
-            <li class="list-group-item">Vestibulum at eros</li>
 
         </ul>
 

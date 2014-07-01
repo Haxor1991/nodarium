@@ -23,7 +23,7 @@ module.exports = {
             req.params
         );
         if(req.param('sensorMachineName')){
-            Sensor.findOne({machineName: req.param('sensorMachineName')}, 'machineName').exec(function(err,result){
+            Sensor.findOne({machineName: req.param('sensorMachineName')}).exec(function(err,result){
                 if(err){
                     res.jsonp({err: 'something went wrong..., no data'});
                     return;

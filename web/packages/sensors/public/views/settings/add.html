@@ -7,10 +7,6 @@
     <div class="panel-body">
 
         <form action="" name="addNewSensorForm" role="form" class="form-horizontal" novalidate ng-submit="saveNewSensor()">
-    <h3>Sensor ID  {{ sensors }} </h3>
-
-            <h3>Scope</h3>
-            {{ scope }}
 
             <div class="form-group">
                 <label for="sensorTitle" class="col-sm-3 control-label">Display Title</label>
@@ -35,7 +31,7 @@
                 <div class="col-sm-offset-3 col-sm-3">
                     <div class="checkbox">
                         <label >
-                            <input type="checkbox" type="checkbox" ng-model="showOnDashboard" id="showOnDashboard"> <strong>Show on Dashboard</strong>
+                            <input type="checkbox" type="checkbox" ng-model="sensor.showOnDashBoard" id="showOnDashboard"> <strong>Show on Dashboard</strong>
                         </label>
                     </div>
                 </div>
@@ -46,7 +42,7 @@
                 <label for="logIngerval" class="col-sm-3 control-label">Log Interval (Minutes)</label>
 
                 <div class="col-sm-9">
-                    <input type="number" class="form-control" ng-model="logIngerval" id="logIngerval" min="0" required/>
+                    <input type="number" class="form-control" ng-model="sensor.logInterval" id="logIngerval" min="0" required/>
                 </div>
             </div>
 
@@ -55,7 +51,7 @@
                 <label for="sensorTypeSelect" class="col-sm-3 control-label">Sensor Type</label>
 
                 <div class="col-sm-9">
-                    <select name="" class="form-control" id="sensorTypeSelect" ng-model="sensorType" required>
+                    <select name="" class="form-control" id="sensorTypeSelect" ng-model="sensor.sensorType" required>
                         <option value="" selected>-- Please Select A Sensor Type --</option>
                         <option value="dht">DHT Humidity/Temp</option>
                         <option value="1wire-ds18b20">Temperature</option>
@@ -65,11 +61,11 @@
 
 
 
-            <div class="form-group"  ng-show="sensorType == '1wire-ds18b20'">
+            <div class="form-group"  ng-show="sensor.sensorType == '1wire-ds18b20'">
                 <label for="oneWireBus" class="col-sm-3 control-label">One Wire Bus</label>
 
                 <div class="col-sm-9">
-                    <select name="" class="form-control" id="oneWireBus" ng-model="oneWireBus" >
+                    <select name="" class="form-control" id="oneWireBus" ng-model="sensor.oneWireBus" >
                         <option value="" selected>-- Please Select Sensor Bus --</option>
                         <option value="tanks">Tanks</option>
                         <option value="mixing-station">Mixing Station</option>
@@ -77,11 +73,11 @@
                 </div>
             </div>
 
-            <div class="form-group"  ng-show="sensorType == 'dht' || sensorType == '1wire-ds18b20'">
+            <div class="form-group"  ng-show="sensor.sensorType == 'dht' || sensor.sensorType == '1wire-ds18b20'">
                 <label for="sensorNumber" class="col-sm-3 control-label">Sensor Number</label>
 
                 <div class="col-sm-9">
-                    <input type="number" class="form-control" ng-model="sensorNumber" id="sensorNumber" min="0" />
+                    <input type="number" class="form-control" ng-model="sensor.sensorNumber" id="sensorNumber" min="0" />
                 </div>
             </div>
 
