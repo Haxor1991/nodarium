@@ -114,6 +114,7 @@ app.arduino.verifyCommand = function(commandObj) {
 
 
             case '04':  // lights
+                console.log(commandObj);
                 console.log(timeStamp+': Updating light channel '+ commandObj.pwmchannel + ' on chip '+commandObj.pwmChip+', new value is: '+commandObj.intensity);
 
                 break;
