@@ -134,6 +134,8 @@ app.arduino.verifyCommand = function(commandObj) {
 function writeAndDrain(data, callback) {
 
     if (app.serialConnectionStatus) {
+
+        app.arduino.sendingCommand = true;
             callback = callback || function () {
             };
             serialPort.write(data, function (error, results) {
