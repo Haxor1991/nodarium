@@ -149,6 +149,7 @@ setInterval(function(){
     if(app.arduino.sendingCommand) return;
 
     if(Object.size(app.arduino.q) > 0) {
+        console.log('sending message');
         for(var key in app.arduino.q) break;
         writeAndDrain(pad(app.arduino.q[key].commandNumber,5)+app.arduino.q[key].commandString+'\n');
     }
