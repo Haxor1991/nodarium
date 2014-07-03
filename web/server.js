@@ -157,7 +157,7 @@ setInterval(function(){
     }
 
 
-}, 100);
+}, 1);
 
 
 serialPort.on('data', function (data) {
