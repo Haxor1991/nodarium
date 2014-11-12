@@ -22,9 +22,9 @@ Arduino.register(function (app, auth, database, socketio) {
 
 
         tasks.create('arduino-commands', {
-            title: 'turn on light'
-            , to: 'tj@learnboost.com'
-            , template: 'welcome-email'
+            title: 'turn on light',
+            to: 'tj@learnboost.com',
+            template: 'welcome-email'
         }).priority('normal').attempts(5).save();
 
 
